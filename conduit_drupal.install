@@ -1,0 +1,171 @@
+<?php
+/**
+ * @file
+ * Provides installation functions.
+ *
+ * @author Jimmy Berry ("boombatower", http://drupal.org/user/214218)
+ */
+
+/**
+ * Implements hook_install().
+ */
+function conduit_drupal_install() {
+  field_helper_install_all('drupal_coder');
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function conduit_drupal_uninstall() {
+  field_helper_uninstall_all('drupal_coder');
+}
+
+/**
+ * Implements hook_install_fields().
+ */
+function conduit_drupal_install_fields() {
+  $t = get_t();
+  return array(
+    'conduit_result_drupal_summary' => array(
+      'field_name' => 'conduit_result_drupal_summary',
+      'type' => 'text',
+      'cardinality' => -1,
+    ),
+    'conduit_result_drupal_delta' => array(
+      'field_name' => 'conduit_result_drupal_delta',
+      'type' => 'number_integer',
+      'cardinality' => -1,
+    ),
+    'conduit_result_drupal_file' => array(
+      'field_name' => 'conduit_result_drupal_file',
+      'type' => 'text',
+      'cardinality' => -1,
+    ),
+    'conduit_result_drupal_line' => array(
+      'field_name' => 'conduit_result_drupal_line',
+      'type' => 'number_integer',
+      'cardinality' => -1,
+    ),
+    'conduit_result_drupal_file' => array(
+      'field_name' => 'conduit_result_drupal_file',
+      'type' => 'text',
+      'cardinality' => -1,
+    ),
+    'conduit_result_drupal_severity' => array(
+      'field_name' => 'conduit_result_drupal_severity',
+      'type' => 'text',
+      'cardinality' => -1,
+    ),
+    'conduit_result_drupal_message' => array(
+      'field_name' => 'conduit_result_drupal_message',
+      'type' => 'text',
+      'cardinality' => -1,
+    ),
+    'conduit_result_drupal_group' => array(
+      'field_name' => 'conduit_result_drupal_group',
+      'type' => 'text',
+      'cardinality' => -1,
+    ),
+    'conduit_result_drupal_function' => array(
+      'field_name' => 'conduit_result_drupal_function',
+      'type' => 'text',
+      'cardinality' => -1,
+    ),
+  );
+}
+
+/**
+ * Implements hook_install_instances().
+ */
+function conduit_drupal_install_instances() {
+  return array();
+}
+
+/**
+ * Drupal job field instances.
+ *
+ * @param $type
+ *   Node type to assign instances to.
+ * @return
+ *   Associative array of field instances with unique keys.
+ * @see hook_install_instances()
+ */
+function conduit_drupal_install_instances_job($type) {
+  module_load_install('conduit');
+  $t = get_t();
+
+  $instances = array(
+    'job_conduit_result_drupal_summary' => array(
+      'field_name' => 'conduit_result_drupal_summary',
+      'label' => $t('Summary'),
+      'description' => $t('Summary of result group.'),
+      'widget' => array(
+        'type' => 'text_textfield',
+      ),
+    ),
+    'job_conduit_result_drupal_delta' => array(
+      'field_name' => 'conduit_result_drupal_delta',
+      'label' => $t('Delta'),
+      'description' => $t('Reference to summary delta.'),
+      'settings' => array('min' => '0'),
+      'widget' => array(
+        'type' => 'number',
+      ),
+    ),
+    'job_conduit_result_drupal_file' => array(
+      'field_name' => 'conduit_result_drupal_file',
+      'label' => $t('File'),
+      'description' => $t('File to which message related.'),
+      'widget' => array(
+        'type' => 'text_textfield',
+      ),
+    ),
+    'job_conduit_result_drupal_line' => array(
+      'field_name' => 'conduit_result_drupal_line',
+      'label' => $t('Line'),
+      'description' => $t('Line number to which message is related.'),
+      'settings' => array('min' => '0'),
+      'widget' => array(
+        'type' => 'number',
+      ),
+    ),
+    'job_conduit_result_drupal_severity' => array(
+      'field_name' => 'conduit_result_drupal_severity',
+      'label' => $t('Severity'),
+      'description' => $t('Severity of message.'),
+      'widget' => array(
+        'type' => 'text_textfield',
+      ),
+    ),
+    'job_conduit_result_drupal_message' => array(
+      'field_name' => 'conduit_result_drupal_message',
+      'label' => $t('Message'),
+      'description' => $t('Message text.'),
+      'widget' => array(
+        'type' => 'text_textfield',
+      ),
+    ),
+    'job_conduit_result_drupal_group' => array(
+      'field_name' => 'conduit_result_drupal_group',
+      'label' => $t('Group'),
+      'description' => $t('Group to which message belongs.'),
+      'widget' => array(
+        'type' => 'text_textfield',
+      ),
+    ),
+    'job_conduit_result_drupal_function' => array(
+      'field_name' => 'conduit_result_drupal_function',
+      'label' => $t('Function'),
+      'description' => $t('Function to which message is related.'),
+      'widget' => array(
+        'type' => 'text_textfield',
+      ),
+    ),
+  );
+
+  foreach ($instances as &$instance) {
+    $instance['entity_type'] = 'node';
+    $instance['bundle'] = $type;
+  }
+  return conduit_install_instances_job($type) + $instances;
+}

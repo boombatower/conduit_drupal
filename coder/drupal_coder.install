@@ -1,0 +1,42 @@
+<?php
+/**
+ * @file
+ * Provides installation functions.
+ *
+ * @author Jimmy Berry ("boombatower", http://drupal.org/user/214218)
+ */
+
+/**
+ * Implements hook_install().
+ */
+function drupal_coder_install() {
+  conduit_install_node_type('conduit_job_drupal_coder');
+  field_helper_install_all('drupal_coder');
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function drupal_coder_uninstall() {
+  module_load_install('conduit');
+  conduit_uninstall_node_type('conduit_job_drupal_coder');
+  field_helper_uninstall_all('drupal_coder');
+}
+
+/**
+ * Implements hook_install_fields().
+ */
+function drupal_coder_install_fields() {
+  return array();
+}
+
+/**
+ * Implements hook_install_instances().
+ */
+function drupal_coder_install_instances() {
+  module_load_install('conduit_drupal');
+  $instances = conduit_drupal_install_instances_job('conduit_job_drupal_coder');
+  unset($instances['job_conduit_result_drupal_group']);
+  unset($instances['job_conduit_result_drupal_function']);
+  return $instances;
+}

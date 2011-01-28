@@ -1,0 +1,14 @@
+<?php
+/**
+ * @file
+ * Provides Drupal coder integration.
+ *
+ * @author Jimmy Berry ("boombatower", http://drupal.org/user/214218)
+ */
+
+/**
+ * Implements hook_node_info().
+ */
+function drupal_coder_node_info() {
+  return conduit_node_info_job('drupal_coder');
+}
