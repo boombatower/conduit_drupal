@@ -1,1 +1,26 @@
 <?php
+/**
+ * @file
+ * Provides common Conduit Drupal code.
+ *
+ * @author Jimmy Berry ("boombatower", http://drupal.org/user/214218)
+ */
+
+/**
+ * Implements hook_conduit_validate().
+ */
+function conduit_drupal_conduit_validate(array $properties) {
+  extract($properties);
+  if ($version < 6 || $version > 8) {
+    conduit_validate_error('version', t('must be 6, 7, or 8'));
+  }
+}
+
+/**
+ * Implements hook_conduit_default_properties().
+ */
+function conduit_drupal_conduit_default_properties() {
+  return array(
+    'version' => 7,
+  );
+}
