@@ -10,14 +10,14 @@
  * Implements hook_install().
  */
 function conduit_drupal_install() {
-  field_helper_install_all('drupal_coder');
+  field_helper_install_all('conduit_drupal');
 }
 
 /**
  * Implements hook_uninstall().
  */
 function conduit_drupal_uninstall() {
-  field_helper_uninstall_all('drupal_coder');
+  field_helper_uninstall_all('conduit_drupal');
 }
 
 /**
@@ -44,11 +44,6 @@ function conduit_drupal_install_fields() {
     'conduit_result_drupal_line' => array(
       'field_name' => 'conduit_result_drupal_line',
       'type' => 'number_integer',
-      'cardinality' => -1,
-    ),
-    'conduit_result_drupal_file' => array(
-      'field_name' => 'conduit_result_drupal_file',
-      'type' => 'text',
       'cardinality' => -1,
     ),
     'conduit_result_drupal_severity' => array(
