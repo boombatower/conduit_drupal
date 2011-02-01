@@ -24,3 +24,18 @@ function conduit_drupal_conduit_default_properties() {
     'version' => 7,
   );
 }
+
+/**
+ * Implements hook_views_field_add_multi_join_alter().
+ */
+function conduit_drupal_views_field_add_multi_join_alter($join, $base_field, $join_field) {
+  if ($join_field == 'conduit_result_drupal_summary') {
+    if ($base_field == 'conduit_result_drupal_delta') {
+      $join['left_field'][3] = 'conduit_result_drupal_delta_value';
+      $join['type'] = 'LEFT';
+    }
+    else {
+      $base_field = 'conduit_result_drupal_delta';
+    }
+  }
+}

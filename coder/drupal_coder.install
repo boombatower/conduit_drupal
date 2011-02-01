@@ -12,6 +12,7 @@
 function drupal_coder_install() {
   conduit_install_node_type('conduit_job_drupal_coder');
   field_helper_install_all('drupal_coder');
+  conduit_drupal_install_group('conduit_job_drupal_coder');
 }
 
 /**
@@ -21,6 +22,7 @@ function drupal_coder_uninstall() {
   module_load_install('conduit');
   conduit_uninstall_node_type('conduit_job_drupal_coder');
   field_helper_uninstall_all('drupal_coder');
+  conduit_drupal_uninstall_group('conduit_job_drupal_coder');
 }
 
 /**
