@@ -28,14 +28,19 @@ function conduit_drupal_conduit_default_properties() {
 /**
  * Implements hook_views_field_add_multi_join_alter().
  */
-function conduit_drupal_views_field_add_multi_join_alter($join, $base_field, $join_field) {
+function conduit_drupal_views_field_add_multi_join_alter(&$join, &$base_field, &$join_field) {
+  // If the field is joining to summary table proceed.
   if ($join_field == 'conduit_result_drupal_summary') {
+    // If the delta field is being joined to summary then join on the delta
+    // fields value instead of it's delta column and perform a left join since
+    // there will always be summaries, but not necessarily messages. If joining
+    // to any other field then join to the delta field table.
     if ($base_field == 'conduit_result_drupal_delta') {
-      $join['left_field'][3] = 'conduit_result_drupal_delta_value';
+      $join['field'][3] = 'conduit_result_drupal_delta_value';
       $join['type'] = 'LEFT';
     }
     else {
-      $base_field = 'conduit_result_drupal_delta';
+      $join['left_table'] = 'field_data_conduit_result_drupal_delta';
     }
   }
 }
