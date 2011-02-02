@@ -21,6 +21,7 @@ function conduit_drupal_conduit_validate(array $properties) {
  */
 function conduit_drupal_conduit_default_properties() {
   return array(
+    'mask' => '/\.(php|inc|install|module|test)$/',
     'version' => 7,
   );
 }
