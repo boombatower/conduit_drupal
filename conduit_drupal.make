@@ -19,3 +19,5 @@ projects[field_group_views][download][url] = git@github.com:boombatower/field_gr
 projects[field_suppress][type] = module
 projects[field_suppress][download][type] = git
 projects[field_suppress][download][url] = git@github.com:boombatower/field_suppress.git
+
+projects[views] = 3

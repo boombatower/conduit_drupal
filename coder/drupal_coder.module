@@ -65,3 +65,12 @@ function drupal_coder_conduit_result($node, $delta, $result) {
   // Generate summary message.
   $node->conduit_summary[LANGUAGE_NONE][0]['value'] = '@TODO';
 }
+
+/**
+ * Implements hook_views_api().
+ */
+function drupal_coder_views_api() {
+  return array(
+    'api' => 3,
+  );
+}
