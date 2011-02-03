@@ -42,28 +42,25 @@ function drupal_coder_conduit_queue_build(array $properties) {
  * Implements hook_conduit_init().
  */
 function drupal_coder_conduit_init($node, $chunk_count) {
-  // Number of results cannot be predetermined.
+  conduit_drupal_conduit_init($node, $chunk_count);
 }
 
 /**
  * Implements hook_conduit_result().
  */
 function drupal_coder_conduit_result($node, $delta, $result) {
-  if (is_array($result)) {
-    foreach ($result as $file => $messages) {
-      $node->conduit_result_drupal_summary[LANGUAGE_NONE][]['value'] = $file . ': @TODO';
-      $delta = count($node->conduit_result_drupal_summary[LANGUAGE_NONE]) - 1;
-      foreach ($messages as $message) {
-        $node->conduit_result_drupal_delta[LANGUAGE_NONE][]['value'] = $delta;
-        $node->conduit_result_drupal_line[LANGUAGE_NONE][]['value'] = $message['line'];
-        $node->conduit_result_drupal_severity[LANGUAGE_NONE][]['value'] = $message['severity'];
-        $node->conduit_result_drupal_message[LANGUAGE_NONE][]['value'] = $message['message'];
-      }
-    }
-  }
+  conduit_drupal_conduit_result($node, $delta, $result);
+}
 
-  // Generate summary message.
-  $node->conduit_summary[LANGUAGE_NONE][0]['value'] = '@TODO';
+/**
+ * Implements hook_conduit_drupal_result_message().
+ */
+function drupal_coder_conduit_drupal_result_message($total) {
+  return t('@critical critical, @normal normal, and @minor minor messages.', array(
+    '@critical' => $total[0],
+    '@normal' => $total[1],
+    '@minor' => $total[2],
+  ));
 }
 
 /**

@@ -27,6 +27,46 @@ function conduit_drupal_conduit_default_properties() {
 }
 
 /**
+ * Implements hook_conduit_init().
+ */
+function conduit_drupal_conduit_init($node, $chunk_count) {
+  // @TODO Necessary since field_suppress adds a "blank" entry.
+  $node->conduit_result_drupal_summary[LANGUAGE_NONE] = array();
+}
+
+/**
+ * Implements hook_conduit_result().
+ */
+function conduit_drupal_conduit_result($node, $delta, $result) {
+  // @TODO Necessary since field_suppress adds a "blank" entry.
+  $node->conduit_result_drupal_summary[LANGUAGE_NONE] = array();
+
+  if (is_array($result)) {
+    $info = conduit_job_info($node->type);
+    $node->conduit_summary[LANGUAGE_NONE][0]['value'] = module_invoke($info['module'], 'conduit_drupal_result_message', $result['#total']);
+    unset($result['#total']);
+
+    $delta = count($node->conduit_result_drupal_summary[LANGUAGE_NONE]);
+    foreach ($result as $file => $messages) {
+      $node->conduit_result_drupal_summary[LANGUAGE_NONE][]['value'] = $file . ': ' . module_invoke($info['module'], 'conduit_drupal_result_message', $messages['#total']);
+      $node->conduit_result_drupal_item[LANGUAGE_NONE][]['value'] = $file;
+      foreach ($messages['#total'] as $type => $total) {
+        $node->{'conduit_result_drupal_type_' . $type}[LANGUAGE_NONE][]['value'] = $messages['#total'][$type];
+      }
+      unset($messages['#total']);
+
+      foreach ($messages as $message) {
+        $node->conduit_result_drupal_delta[LANGUAGE_NONE][]['value'] = $delta;
+        foreach ($message as $key => $value) {
+          $node->{'conduit_result_drupal_' . $key}[LANGUAGE_NONE][]['value'] = $message[$key];
+        }
+      }
+      $delta++;
+    }
+  }
+}
+
+/**
  * Implements hook_views_field_add_multi_join_alter().
  */
 function conduit_drupal_views_field_add_multi_join_alter(&$join, &$base_field, &$join_field) {
@@ -40,7 +80,7 @@ function conduit_drupal_views_field_add_multi_join_alter(&$join, &$base_field, &
       $join['field'][3] = 'conduit_result_drupal_delta_value';
       $join['type'] = 'LEFT';
     }
-    else {
+    elseif ($base_field != 'conduit_result_drupal_item' && strpos($base_field, 'conduit_result_drupal_type_') === FALSE) {
       $join['left_table'] = 'field_data_conduit_result_drupal_delta';
     }
   }

@@ -86,6 +86,27 @@ function conduit_drupal_install_fields() {
       'type' => 'text',
       'cardinality' => -1,
     ),
+    'conduit_result_drupal_item' => array(
+      'field_name' => 'conduit_result_drupal_item',
+      'type' => 'text',
+      'cardinality' => -1,
+    ),
+    'conduit_result_drupal_type_0' => array(
+      'field_name' => 'conduit_result_drupal_type_0',
+      'type' => 'number_integer',
+      'cardinality' => -1,
+    ),
+    'conduit_result_drupal_type_1' => array(
+      'field_name' => 'conduit_result_drupal_type_1',
+      'type' => 'number_integer',
+      'cardinality' => -1,
+    ),
+    'conduit_result_drupal_type_2' => array(
+      'field_name' => 'conduit_result_drupal_type_2',
+      'type' => 'number_integer',
+      'cardinality' => -1,
+    ),
+
     'conduit_result_drupal_delta' => array(
       'field_name' => 'conduit_result_drupal_delta',
       'type' => 'number_integer',
@@ -96,18 +117,8 @@ function conduit_drupal_install_fields() {
       'type' => 'text',
       'cardinality' => -1,
     ),
-    'conduit_result_drupal_line' => array(
-      'field_name' => 'conduit_result_drupal_line',
-      'type' => 'number_integer',
-      'cardinality' => -1,
-    ),
-    'conduit_result_drupal_severity' => array(
-      'field_name' => 'conduit_result_drupal_severity',
-      'type' => 'text',
-      'cardinality' => -1,
-    ),
-    'conduit_result_drupal_message' => array(
-      'field_name' => 'conduit_result_drupal_message',
+    'conduit_result_drupal_function' => array(
+      'field_name' => 'conduit_result_drupal_function',
       'type' => 'text',
       'cardinality' => -1,
     ),
@@ -116,8 +127,18 @@ function conduit_drupal_install_fields() {
       'type' => 'text',
       'cardinality' => -1,
     ),
-    'conduit_result_drupal_function' => array(
-      'field_name' => 'conduit_result_drupal_function',
+    'conduit_result_drupal_line' => array(
+      'field_name' => 'conduit_result_drupal_line',
+      'type' => 'number_integer',
+      'cardinality' => -1,
+    ),
+    'conduit_result_drupal_message' => array(
+      'field_name' => 'conduit_result_drupal_message',
+      'type' => 'text',
+      'cardinality' => -1,
+    ),
+    'conduit_result_drupal_type' => array(
+      'field_name' => 'conduit_result_drupal_type',
       'type' => 'text',
       'cardinality' => -1,
     ),
@@ -148,68 +169,80 @@ function conduit_drupal_install_instances_job($type) {
     'job_conduit_result_drupal_summary' => array(
       'field_name' => 'conduit_result_drupal_summary',
       'label' => $t('Summary'),
-      'description' => $t('Summary of result group.'),
-      'widget' => array(
-        'type' => 'text_textfield',
-      ),
+      'description' => $t('Summary of a group of results.'),
+      'widget' => array('type' => 'text_textfield'),
     ),
+    'job_conduit_result_drupal_item' => array(
+      'field_name' => 'conduit_result_drupal_item',
+      'label' => $t('Item'),
+      'description' => $t('Item to which the summary is related.'),
+      'widget' => array('type' => 'text_textfield'),
+    ),
+    'job_conduit_result_drupal_type_0' => array(
+      'field_name' => 'conduit_result_drupal_type_0',
+      'label' => $t('Type 0'),
+      'description' => $t('Total number of messages of type 0 in the group.'),
+      'settings' => array('min' => 0),
+      'widget' => array('type' => 'number'),
+    ),
+    'job_conduit_result_drupal_type_1' => array(
+      'field_name' => 'conduit_result_drupal_type_1',
+      'label' => $t('Type 1'),
+      'description' => $t('Total number of messages of type 1 in the group.'),
+      'settings' => array('min' => 0),
+      'widget' => array('type' => 'number'),
+    ),
+    'job_conduit_result_drupal_type_2' => array(
+      'field_name' => 'conduit_result_drupal_type_2',
+      'label' => $t('Type 2'),
+      'description' => $t('Total number of messages of type 2 in the group.'),
+      'settings' => array('min' => 0),
+      'widget' => array('type' => 'number'),
+    ),
+
     'job_conduit_result_drupal_delta' => array(
       'field_name' => 'conduit_result_drupal_delta',
       'label' => $t('Delta'),
       'description' => $t('Reference to summary delta.'),
-      'settings' => array('min' => '0'),
-      'widget' => array(
-        'type' => 'number',
-      ),
+      'settings' => array('min' => 0),
+      'widget' => array('type' => 'number'),
     ),
     'job_conduit_result_drupal_file' => array(
       'field_name' => 'conduit_result_drupal_file',
       'label' => $t('File'),
       'description' => $t('File to which message related.'),
-      'widget' => array(
-        'type' => 'text_textfield',
-      ),
-    ),
-    'job_conduit_result_drupal_line' => array(
-      'field_name' => 'conduit_result_drupal_line',
-      'label' => $t('Line'),
-      'description' => $t('Line number to which message is related.'),
-      'settings' => array('min' => '0'),
-      'widget' => array(
-        'type' => 'number',
-      ),
-    ),
-    'job_conduit_result_drupal_severity' => array(
-      'field_name' => 'conduit_result_drupal_severity',
-      'label' => $t('Severity'),
-      'description' => $t('Severity of message.'),
-      'widget' => array(
-        'type' => 'text_textfield',
-      ),
-    ),
-    'job_conduit_result_drupal_message' => array(
-      'field_name' => 'conduit_result_drupal_message',
-      'label' => $t('Message'),
-      'description' => $t('Message text.'),
-      'widget' => array(
-        'type' => 'text_textfield',
-      ),
-    ),
-    'job_conduit_result_drupal_group' => array(
-      'field_name' => 'conduit_result_drupal_group',
-      'label' => $t('Group'),
-      'description' => $t('Group to which message belongs.'),
-      'widget' => array(
-        'type' => 'text_textfield',
-      ),
+      'widget' => array('type' => 'text_textfield'),
     ),
     'job_conduit_result_drupal_function' => array(
       'field_name' => 'conduit_result_drupal_function',
       'label' => $t('Function'),
       'description' => $t('Function to which message is related.'),
-      'widget' => array(
-        'type' => 'text_textfield',
-      ),
+      'widget' => array('type' => 'text_textfield'),
+    ),
+    'job_conduit_result_drupal_group' => array(
+      'field_name' => 'conduit_result_drupal_group',
+      'label' => $t('Group'),
+      'description' => $t('Group to which message belongs.'),
+      'widget' => array('type' => 'text_textfield'),
+    ),
+    'job_conduit_result_drupal_line' => array(
+      'field_name' => 'conduit_result_drupal_line',
+      'label' => $t('Line'),
+      'description' => $t('Line number to which message is related.'),
+      'settings' => array('min' => -1),
+      'widget' => array('type' => 'number'),
+    ),
+    'job_conduit_result_drupal_message' => array(
+      'field_name' => 'conduit_result_drupal_message',
+      'label' => $t('Message'),
+      'description' => $t('Message text.'),
+      'widget' => array('type' => 'text_textfield'),
+    ),
+    'job_conduit_result_drupal_type' => array(
+      'field_name' => 'conduit_result_drupal_type',
+      'label' => $t('Type'),
+      'description' => $t('Type of message.'),
+      'widget' => array('type' => 'text_textfield'),
     ),
   );
 
