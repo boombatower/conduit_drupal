@@ -56,7 +56,7 @@ function drupal_coder_conduit_result($node, $delta, $result) {
  * Implements hook_conduit_drupal_result_message().
  */
 function drupal_coder_conduit_drupal_result_message($total) {
-  return t('@critical critical, @normal normal, and @minor minor messages.', array(
+  return t('@critical critical, @normal normal, and @minor minor messages', array(
     '@critical' => $total[0],
     '@normal' => $total[1],
     '@minor' => $total[2],
