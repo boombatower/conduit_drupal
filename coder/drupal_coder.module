@@ -10,7 +10,7 @@
  * Implements hook_node_info().
  */
 function drupal_coder_node_info() {
-  return conduit_node_info_job('drupal_coder');
+  return conduit_node_info_job('drupal_coder', t('Perform a review of code.'));
 }
 
 /**
