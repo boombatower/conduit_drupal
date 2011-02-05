@@ -31,16 +31,19 @@ function conduit_drupal_conduit_default_properties() {
  */
 function conduit_drupal_conduit_init($node, $chunk_count) {
   // @TODO Necessary since field_suppress adds a "blank" entry.
-  $node->conduit_result_drupal_summary[LANGUAGE_NONE] = array();
+  module_load_install('conduit_drupal');
+  $fields = array_keys(conduit_drupal_install_fields());
+  foreach ($fields as $field) {
+    if (isset($node->$field)) {
+      $node->{$field}[LANGUAGE_NONE] = array();
+    }
+  }
 }
 
 /**
  * Implements hook_conduit_result().
  */
 function conduit_drupal_conduit_result($node, $delta, $result) {
-  // @TODO Necessary since field_suppress adds a "blank" entry.
-  $node->conduit_result_drupal_summary[LANGUAGE_NONE] = array();
-
   if (is_array($result)) {
     $info = conduit_job_info($node->type);
     $node->conduit_summary[LANGUAGE_NONE][0]['value'] = module_invoke($info['module'], 'conduit_drupal_result_message', $result['#total']);
