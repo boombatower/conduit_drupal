@@ -67,6 +67,15 @@ function conduit_drupal_conduit_result($node, $delta, $result) {
 }
 
 /**
+ * Implements hook_views_data_alter().
+ */
+function conduit_drupal_views_data_alter(&$data) {
+  views_field_add_multi_join($data, 'conduit_result_drupal_type_0', 'conduit_result_drupal_item');
+  views_field_add_multi_join($data, 'conduit_result_drupal_type_1', 'conduit_result_drupal_item');
+  views_field_add_multi_join($data, 'conduit_result_drupal_type_2', 'conduit_result_drupal_item');
+}
+
+/**
  * Implements hook_views_field_add_multi_join_alter().
  */
 function conduit_drupal_views_field_add_multi_join_alter(&$join, &$base_field, &$join_field) {
