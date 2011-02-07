@@ -90,7 +90,6 @@ function conduit_drupal_views_field_add_multi_join_alter(&$join, &$base_field, &
     // to any other field then join to the delta field table.
     if ($base_field == 'conduit_result_drupal_delta') {
       $join['field'][3] = 'conduit_result_drupal_delta_value';
-      $join['type'] = 'LEFT';
     }
     elseif ($base_field != 'conduit_result_drupal_item' && strpos($base_field, 'conduit_result_drupal_type_') === FALSE) {
       $join['left_table'] = 'field_data_conduit_result_drupal_delta';
