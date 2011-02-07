@@ -1,0 +1,65 @@
+<?php
+/**
+ * @file
+ * Provides Drupal coder integration.
+ *
+ * @author Jimmy Berry ("boombatower", http://drupal.org/user/214218)
+ */
+
+/**
+ * Implements hook_node_info().
+ */
+function drupal_scan_node_info() {
+  return conduit_node_info_job('drupal_scan');
+}
+
+/**
+ * Implements hook_conduit_validate().
+ */
+function drupal_scan_conduit_validate(array $properties) {
+  conduit_drupal_conduit_validate($properties);
+}
+
+/**
+ * Implements hook_conduit_default_properties().
+ */
+function drupal_scan_conduit_default_properties() {
+  return conduit_drupal_conduit_default_properties();
+}
+
+/**
+ * Implements hook_conduit_queue_build().
+ */
+function drupal_scan_conduit_queue_build(array $properties) {
+  return array(array());
+}
+
+/**
+ * Implements hook_conduit_init().
+ */
+function drupal_scan_conduit_init($node, $chunk_count) {
+  // Number of results cannot be predetermined.
+}
+
+/**
+ * Implements hook_conduit_result().
+ */
+function drupal_scan_conduit_result($node, $delta, $result) {
+  if (is_array($result)) {
+    if ($result['type'] == 'list') {
+      $node->conduit_summary[LANGUAGE_NONE][0]['value'] = t('Found @count test cases', array('@count' => count($result['classes'])));
+      foreach ($result['classes'] as $class) {
+        $node->conduit_result_drupal_scan_list[LANGUAGE_NONE][]['value'] = $class;
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_views_api().
+ */
+function drupal_scan_views_api() {
+  return array(
+    'api' => 3,
+  );
+}

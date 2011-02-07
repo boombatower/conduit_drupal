@@ -25,8 +25,10 @@ function conduit_drupal_uninstall() {
  *
  * @param $type
  *   Node type.
+ * @param $primary_field
+ *   (Optional) Primary field for the result view.
  */
-function conduit_drupal_install_group($type) {
+function conduit_drupal_install_group($type, $primary_field = NULL) {
   $info = conduit_job_info($type);
   $group = array(
     'group_name' => $info['module'] . '_result',
@@ -40,7 +42,7 @@ function conduit_drupal_install_group($type) {
     'format_type' => 'view',
     'format_settings' => array(
       'instance_settings' => array(
-        'primary_field' => 'conduit_result_drupal_summary',
+        'primary_field' => $primary_field ? $primary_field : 'conduit_result_drupal_summary',
         'field_suppress' => 'load',
       ),
     ),

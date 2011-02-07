@@ -1,0 +1,58 @@
+<?php
+/**
+ * @file
+ * Provides installation functions.
+ *
+ * @author Jimmy Berry ("boombatower", http://drupal.org/user/214218)
+ */
+
+/**
+ * Implements hook_install().
+ */
+function drupal_scan_install() {
+  conduit_install_node_type('conduit_job_drupal_scan');
+  field_helper_install_all('drupal_scan');
+  conduit_drupal_install_group('conduit_job_drupal_scan', 'conduit_result_drupal_scan_list');
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function drupal_scan_uninstall() {
+  module_load_install('conduit');
+  conduit_uninstall_node_type('conduit_job_drupal_scan');
+  field_helper_uninstall_all('drupal_scan');
+  conduit_drupal_uninstall_group('conduit_job_drupal_scan');
+}
+
+/**
+ * Implements hook_install_fields().
+ */
+function drupal_scan_install_fields() {
+  $t = get_t();
+  return array(
+    'conduit_result_drupal_scan_list' => array(
+      'field_name' => 'conduit_result_drupal_scan_list',
+      'type' => 'text',
+      'cardinality' => -1,
+    ),
+  );
+}
+
+/**
+ * Implements hook_install_instances().
+ */
+function drupal_scan_install_instances() {
+  module_load_install('conduit');
+  $t = get_t();
+  return conduit_install_instances_job('conduit_job_drupal_scan') + array(
+    'job_conduit_result_drupal_scan_list' => array(
+      'entity_type' => 'node',
+      'bundle' => 'conduit_job_drupal_scan',
+      'field_name' => 'conduit_result_drupal_scan_list',
+      'label' => $t('List'),
+      'description' => $t('The list of test cases found.'),
+      'widget' => array('type' => 'text_textfield'),
+    ),
+  );
+}
