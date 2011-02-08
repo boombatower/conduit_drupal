@@ -1,0 +1,41 @@
+<?php
+/**
+ * @file
+ * Provides installation functions.
+ *
+ * @author Jimmy Berry ("boombatower", http://drupal.org/user/214218)
+ */
+
+/**
+ * Implements hook_install().
+ */
+function drupal_plumber_install() {
+  conduit_install_node_type('conduit_job_drupal_plumber');
+  field_helper_install_all('drupal_plumber');
+  conduit_drupal_install_group('conduit_job_drupal_plumber');
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function drupal_plumber_uninstall() {
+  module_load_install('conduit');
+  conduit_uninstall_node_type('conduit_job_drupal_plumber');
+  field_helper_uninstall_all('drupal_plumber');
+  conduit_drupal_uninstall_group('conduit_job_drupal_plumber');
+}
+
+/**
+ * Implements hook_install_fields().
+ */
+function drupal_plumber_install_fields() {
+  return array();
+}
+
+/**
+ * Implements hook_install_instances().
+ */
+function drupal_plumber_install_instances() {
+  module_load_install('conduit_drupal');
+  return conduit_drupal_install_instances_job('conduit_job_drupal_plumber');
+}

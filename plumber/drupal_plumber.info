@@ -1,0 +1,6 @@
+name = Drupal plumber
+description = Provides Drupal plumber integration.
+package = Conduit Drupal
+version = 1.0
+core = 7.x
+dependencies[] = conduit_drupal

@@ -1,0 +1,104 @@
+<?php
+/**
+ * @file
+ * Provides Drupal coder integration.
+ *
+ * @author Jimmy Berry ("boombatower", http://drupal.org/user/214218)
+ */
+
+/**
+ * Implements hook_node_info().
+ */
+function drupal_plumber_node_info() {
+  return conduit_node_info_job('drupal_plumber', t('Execute test cases.'));
+}
+
+/**
+ * Implements hook_conduit_validate().
+ */
+function drupal_plumber_conduit_validate(array $properties) {
+  conduit_drupal_conduit_validate($properties);
+}
+
+/**
+ * Implements hook_conduit_default_properties().
+ */
+function drupal_plumber_conduit_default_properties() {
+  return conduit_drupal_conduit_default_properties() + array(
+    'variables' => array(),
+    'classes' => array(),
+    'database' => 'mysql',
+    'statuses' => array('fail', 'exception', 'debug'),
+  );
+}
+
+/**
+ * Implements hook_conduit_queue_build().
+ */
+function drupal_plumber_conduit_queue_build(array $properties) {
+  $classes = $properties['classes'];
+
+  // If scan property is set then attempt to load scan job and uses the classes
+  // stored in the job results.
+  if (isset($properties['scan']) && ($scan = current(field_suppress_entity_load_unsuppressed('node', array($properties['scan']))))) {
+    $list = isset($scan->conduit_result_drupal_scan_list[LANGUAGE_NONE]) ? $scan->conduit_result_drupal_scan_list[LANGUAGE_NONE] : array();
+    $classes = array();
+    foreach ($list as $class) {
+      $classes[] = $class['value'];
+    }
+  }
+
+  // Split test classes up into chunks of 20.
+  $chunks = array_chunk($classes, 20);
+  $items = array();
+  foreach ($chunks as $chunk) {
+    $items[] = array(
+      'classes' => $chunk,
+    );
+  }
+
+  // Ensure that one chunk is always queued, even if no tests to run.
+  if (!$items) {
+    $items[] = array();
+  }
+
+  return $items;
+}
+
+/**
+ * Implements hook_conduit_init().
+ */
+function drupal_plumber_conduit_init($node, $chunk_count) {
+  conduit_drupal_conduit_init($node, $chunk_count);
+}
+
+/**
+ * Implements hook_conduit_result().
+ */
+function drupal_plumber_conduit_result($node, $delta, $result) {
+  // Set #title to include test name, class, and group.
+  foreach ($result['meta'] as $class => $info) {
+    $result['result'][$class]['#title'] = "{$info['name']} ($class) [{$info['group']}]";
+  }
+  conduit_drupal_conduit_result($node, $delta, $result['result']);
+}
+
+/**
+ * Implements hook_conduit_drupal_result_message().
+ */
+function drupal_plumber_conduit_drupal_result_message($total) {
+  return t('@pass pass, @fail fail, and @exception exception messages', array(
+    '@pass' => $total[0],
+    '@fail' => $total[1],
+    '@exception' => $total[2],
+  ));
+}
+
+/**
+ * Implements hook_views_api().
+ */
+function drupal_plumber_views_api() {
+  return array(
+    'api' => 3,
+  );
+}
