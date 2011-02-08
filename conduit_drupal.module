@@ -30,7 +30,7 @@ function conduit_drupal_conduit_default_properties() {
  * Implements hook_conduit_init().
  */
 function conduit_drupal_conduit_init($node, $chunk_count) {
-  // @TODO Necessary since field_suppress adds a "blank" entry.
+  // Empty result fields containing previous result.
   module_load_install('conduit_drupal');
   $fields = array_keys(conduit_drupal_install_fields());
   foreach ($fields as $field) {
@@ -50,12 +50,14 @@ function conduit_drupal_conduit_result($node, $delta, $result) {
     unset($result['#total']);
 
     $delta = count($node->conduit_result_drupal_summary[LANGUAGE_NONE]);
-    foreach ($result as $file => $messages) {
-      $node->conduit_result_drupal_summary[LANGUAGE_NONE][]['value'] = $file . ': ' . module_invoke($info['module'], 'conduit_drupal_result_message', $messages['#total']);
-      $node->conduit_result_drupal_item[LANGUAGE_NONE][]['value'] = $file;
+    foreach ($result as $item => $messages) {
+      $title = !empty($messages['#title']) ? $messages['#title'] : $item;
+      $node->conduit_result_drupal_summary[LANGUAGE_NONE][]['value'] = $title . ': ' . module_invoke($info['module'], 'conduit_drupal_result_message', $messages['#total']);
+      $node->conduit_result_drupal_item[LANGUAGE_NONE][]['value'] = $item;
       foreach ($messages['#total'] as $type => $total) {
         $node->{'conduit_result_drupal_type_' . $type}[LANGUAGE_NONE][]['value'] = $messages['#total'][$type];
       }
+      unset($messages['#title']);
       unset($messages['#total']);
 
       foreach ($messages as $message) {
