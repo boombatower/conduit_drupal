@@ -18,6 +18,33 @@ function drupal_plumber_node_info() {
  */
 function drupal_plumber_conduit_validate(array $properties) {
   conduit_drupal_conduit_validate($properties);
+  extract($properties);
+
+  if (isset($scan) && !drupal_plumber_scan_load($properties['scan'])) {
+    conduit_validate_error('scan', t(''));
+  }
+
+  if (!is_array($classes)) {
+    conduit_validate_error('classes', t('must be an array'));
+  }
+  else {
+    foreach ($classes as $index => $class) {
+      if (preg_match('/\s/', $class)) {
+        conduit_validate_error('classes', t('may not contain spaces'), $index);
+      }
+    }
+  }
+
+  if (!is_array($statuses)) {
+    conduit_validate_error('classes', t('must be an array'));
+  }
+  else {
+    foreach ($statuses as $index => $status) {
+      if (!in_array($status, array('pass', 'fail', 'exception', 'debug'))) {
+        conduit_validate_error('statuses', t('must be: pass, fail, exception, or debug'), $index);
+      }
+    }
+  }
 }
 
 /**
@@ -25,10 +52,10 @@ function drupal_plumber_conduit_validate(array $properties) {
  */
 function drupal_plumber_conduit_default_properties() {
   return conduit_drupal_conduit_default_properties() + array(
-    'variables' => array(),
     'classes' => array(),
     'database' => 'mysql',
     'statuses' => array('fail', 'exception', 'debug'),
+    'variables' => array(),
   );
 }
 
@@ -40,12 +67,8 @@ function drupal_plumber_conduit_queue_build(array $properties) {
 
   // If scan property is set then attempt to load scan job and uses the classes
   // stored in the job results.
-  if (isset($properties['scan']) && ($scan = current(field_suppress_entity_load_unsuppressed('node', array($properties['scan']))))) {
-    $list = isset($scan->conduit_result_drupal_scan_list[LANGUAGE_NONE]) ? $scan->conduit_result_drupal_scan_list[LANGUAGE_NONE] : array();
-    $classes = array();
-    foreach ($list as $class) {
-      $classes[] = $class['value'];
-    }
+  if (isset($properties['scan'])) {
+    $classes = drupal_plumber_scan_load($properties['scan']);
   }
 
   // Split test classes up into chunks of 20.
@@ -63,6 +86,27 @@ function drupal_plumber_conduit_queue_build(array $properties) {
   }
 
   return $items;
+}
+
+/**
+ * Load a scan job and extract the test class list.
+ *
+ * @param $scan_id
+ *   Scan job ID.
+ * @return
+ *   List of classes or FALSE.
+ */
+function drupal_plumber_scan_load($scan_id) {
+  if ($scan = current(field_suppress_entity_load_unsuppressed('node', array($scan_id)))) {
+    $list = $scan->conduit_result_drupal_scan_list;
+    $list = isset($list[LANGUAGE_NONE]) ? $list[LANGUAGE_NONE] : array();
+    $classes = array();
+    foreach ($list as $class) {
+      $classes[] = $class['value'];
+    }
+    return $classes;
+  }
+  return FALSE;
 }
 
 /**

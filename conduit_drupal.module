@@ -14,6 +14,15 @@ function conduit_drupal_conduit_validate(array $properties) {
   if ($version < 6 || $version > 8) {
     conduit_validate_error('version', t('must be 6, 7, or 8'));
   }
+
+  // Properties implemented in child plugins.
+  if (isset($database) && !in_array($database, array('mysql'))) {
+    conduit_validate_error('database', t('must be mysql'));
+  }
+
+  if (isset($variables) && !is_array($variables)) {
+    conduit_validate_error('variables', t('must be an array'));
+  }
 }
 
 /**

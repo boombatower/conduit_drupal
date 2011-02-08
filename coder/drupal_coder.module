@@ -18,6 +18,26 @@ function drupal_coder_node_info() {
  */
 function drupal_coder_conduit_validate(array $properties) {
   conduit_drupal_conduit_validate($properties);
+  extract($properties);
+
+  if (!is_array($reviews)) {
+    conduit_validate_error('reviews', t('must be an array'));
+  }
+  else {
+    foreach ($reviews as $index => $review) {
+      if (!in_array($review, array('comment', 'sql', 'i18n', 'style', 'security'))) {
+        conduit_validate_error('reviews', t('must be: comment, sql, i18n, style, or security'), $index);
+      }
+    }
+  }
+
+  if (!in_array($severity, array('critical', 'normal', 'minor'))) {
+    conduit_validate_error('critical', t('must be: critical, normal, or minor'), $index);
+  }
+
+  if (!is_bool($annotate)) {
+    conduit_validate_error('annotate', t('must be a boolean (true or false)'));
+  }
 }
 
 /**
@@ -25,7 +45,7 @@ function drupal_coder_conduit_validate(array $properties) {
  */
 function drupal_coder_conduit_default_properties() {
   return conduit_drupal_conduit_default_properties() + array(
-    'reviews' => array('comment', 'sql', 'i18n', 'style', 'security'),
+    'reviews' => array('comment', 'sql', 'i18n', 'style'),
     'severity' => 'minor',
     'annotate' => FALSE,
   );
