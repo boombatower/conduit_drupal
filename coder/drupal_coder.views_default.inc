@@ -272,24 +272,6 @@ function drupal_coder_views_default_views() {
   $handler->display->display_options['fields']['conduit_result_drupal_summary_value_raw']['element_default_classes'] = 1;
   $handler->display->display_options['fields']['conduit_result_drupal_summary_value_raw']['hide_empty'] = 0;
   $handler->display->display_options['fields']['conduit_result_drupal_summary_value_raw']['empty_zero'] = 0;
-  /* Field: Field tables: conduit_result_drupal_delta=>Value */
-  $handler->display->display_options['fields']['conduit_result_drupal_delta_value_raw']['id'] = 'conduit_result_drupal_delta_value_raw';
-  $handler->display->display_options['fields']['conduit_result_drupal_delta_value_raw']['table'] = 'field_data_conduit_result_drupal_delta';
-  $handler->display->display_options['fields']['conduit_result_drupal_delta_value_raw']['field'] = 'conduit_result_drupal_delta_value_raw';
-  $handler->display->display_options['fields']['conduit_result_drupal_delta_value_raw']['label'] = 'Delta';
-  $handler->display->display_options['fields']['conduit_result_drupal_delta_value_raw']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['conduit_result_drupal_delta_value_raw']['alter']['alter_text'] = 0;
-  $handler->display->display_options['fields']['conduit_result_drupal_delta_value_raw']['alter']['make_link'] = 0;
-  $handler->display->display_options['fields']['conduit_result_drupal_delta_value_raw']['alter']['absolute'] = 0;
-  $handler->display->display_options['fields']['conduit_result_drupal_delta_value_raw']['alter']['trim'] = 0;
-  $handler->display->display_options['fields']['conduit_result_drupal_delta_value_raw']['alter']['word_boundary'] = 1;
-  $handler->display->display_options['fields']['conduit_result_drupal_delta_value_raw']['alter']['ellipsis'] = 1;
-  $handler->display->display_options['fields']['conduit_result_drupal_delta_value_raw']['alter']['strip_tags'] = 0;
-  $handler->display->display_options['fields']['conduit_result_drupal_delta_value_raw']['alter']['html'] = 0;
-  $handler->display->display_options['fields']['conduit_result_drupal_delta_value_raw']['element_label_colon'] = 1;
-  $handler->display->display_options['fields']['conduit_result_drupal_delta_value_raw']['element_default_classes'] = 1;
-  $handler->display->display_options['fields']['conduit_result_drupal_delta_value_raw']['hide_empty'] = 0;
-  $handler->display->display_options['fields']['conduit_result_drupal_delta_value_raw']['empty_zero'] = 0;
   /* Field: Field tables: conduit_result_drupal_type=>Value */
   $handler->display->display_options['fields']['conduit_result_drupal_type_value_raw']['id'] = 'conduit_result_drupal_type_value_raw';
   $handler->display->display_options['fields']['conduit_result_drupal_type_value_raw']['table'] = 'field_data_conduit_result_drupal_type';
@@ -391,7 +373,6 @@ function drupal_coder_views_default_views() {
     t('Offset'),
     t('No results'),
     t('No results to display.'),
-    t('Delta'),
     t('Severity'),
     t('Line'),
     t('Message'),
