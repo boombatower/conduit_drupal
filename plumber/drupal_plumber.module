@@ -20,8 +20,8 @@ function drupal_plumber_conduit_validate(array $properties) {
   conduit_drupal_conduit_validate($properties);
   extract($properties);
 
-  if (isset($scan) && !drupal_plumber_scan_load($properties['scan'])) {
-    conduit_validate_error('scan', t(''));
+  if (isset($scan) && drupal_plumber_scan_load($properties['scan']) === FALSE) {
+    conduit_validate_error('scan', t('must point to scan job'));
   }
 
   if (!is_array($classes)) {
