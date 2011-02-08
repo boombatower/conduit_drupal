@@ -10,7 +10,7 @@
  * Implements hook_node_info().
  */
 function drupal_scan_node_info() {
-  return conduit_node_info_job('drupal_scan');
+  return conduit_node_info_job('drupal_scan', t('Perform PHP syntax check and retrive list of tests.'));
 }
 
 /**
