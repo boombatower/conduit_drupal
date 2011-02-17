@@ -53,30 +53,28 @@ function conduit_drupal_conduit_init($node, $chunk_count) {
  * Implements hook_conduit_result().
  */
 function conduit_drupal_conduit_result($node, $delta, $result) {
-  if (is_array($result)) {
-    $info = conduit_job_info($node->type);
-    $node->conduit_summary[LANGUAGE_NONE][0]['value'] = module_invoke($info['module'], 'conduit_drupal_result_message', $result['#total']);
-    unset($result['#total']);
+  $info = conduit_job_info($node->type);
+  $node->conduit_summary[LANGUAGE_NONE][0]['value'] = module_invoke($info['module'], 'conduit_drupal_result_message', $result['#total']);
+  unset($result['#total']);
 
-    $delta = count($node->conduit_result_drupal_summary[LANGUAGE_NONE]);
-    foreach ($result as $item => $messages) {
-      $title = !empty($messages['#title']) ? $messages['#title'] : $item;
-      $node->conduit_result_drupal_summary[LANGUAGE_NONE][]['value'] = $title . ': ' . module_invoke($info['module'], 'conduit_drupal_result_message', $messages['#total']);
-      $node->conduit_result_drupal_item[LANGUAGE_NONE][]['value'] = $item;
-      foreach ($messages['#total'] as $type => $total) {
-        $node->{'conduit_result_drupal_type_' . $type}[LANGUAGE_NONE][]['value'] = $messages['#total'][$type];
-      }
-      unset($messages['#title']);
-      unset($messages['#total']);
-
-      foreach ($messages as $message) {
-        $node->conduit_result_drupal_delta[LANGUAGE_NONE][]['value'] = $delta;
-        foreach ($message as $key => $value) {
-          $node->{'conduit_result_drupal_' . $key}[LANGUAGE_NONE][]['value'] = $message[$key];
-        }
-      }
-      $delta++;
+  $delta = isset($node->conduit_result_drupal_summary[LANGUAGE_NONE]) ? count($node->conduit_result_drupal_summary[LANGUAGE_NONE]) : 0;
+  foreach ($result as $item => $messages) {
+    $title = !empty($messages['#title']) ? $messages['#title'] : $item;
+    $node->conduit_result_drupal_summary[LANGUAGE_NONE][]['value'] = $title . ': ' . module_invoke($info['module'], 'conduit_drupal_result_message', $messages['#total']);
+    $node->conduit_result_drupal_item[LANGUAGE_NONE][]['value'] = $item;
+    foreach ($messages['#total'] as $type => $total) {
+      $node->{'conduit_result_drupal_type_' . $type}[LANGUAGE_NONE][]['value'] = $messages['#total'][$type];
     }
+    unset($messages['#title']);
+    unset($messages['#total']);
+
+    foreach ($messages as $message) {
+      $node->conduit_result_drupal_delta[LANGUAGE_NONE][]['value'] = $delta;
+      foreach ($message as $key => $value) {
+        $node->{'conduit_result_drupal_' . $key}[LANGUAGE_NONE][]['value'] = $message[$key];
+      }
+    }
+    $delta++;
   }
 }
 

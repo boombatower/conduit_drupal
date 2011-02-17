@@ -46,17 +46,20 @@ function drupal_scan_conduit_init($node, $chunk_count) {
  */
 function drupal_scan_conduit_result($node, $delta, $result) {
   if (is_array($result)) {
-    if ($result['type'] == 'syntax') {
+    if ($node->conduit_status[LANGUAGE_NONE][0]['value'] == CONDUIT_STATUS_FAIL) {
       // @TODO Determine how we want to handle the context data.
       $node->conduit_summary[LANGUAGE_NONE][0]['value'] = t('Syntax errors found in the following file(s): @files',
-        array('@files' => implode(', ', array_keys($result['errors']))));
+        array('@files' => implode(', ', array_keys($result))));
     }
-    elseif ($result['type'] == 'list') {
-      $node->conduit_summary[LANGUAGE_NONE][0]['value'] = t('Found @count test cases', array('@count' => count($result['classes'])));
-      foreach ($result['classes'] as $class) {
+    else {
+      $node->conduit_summary[LANGUAGE_NONE][0]['value'] = t('Found @count test cases', array('@count' => count($result)));
+      foreach ($result as $class) {
         $node->conduit_result_drupal_scan_list[LANGUAGE_NONE][]['value'] = $class;
       }
     }
+  }
+  else {
+    $node->conduit_summary[LANGUAGE_NONE][0]['value'] = $result;
   }
 }
 
