@@ -69,6 +69,13 @@ function drupal_plumber_views_default_views() {
   );
   $handler->display->display_options['style_options']['override'] = 1;
   $handler->display->display_options['style_options']['sticky'] = 0;
+  /* Empty text: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['label'] = 'No results';
+  $handler->display->display_options['empty']['area']['empty'] = FALSE;
+  $handler->display->display_options['empty']['area']['content'] = 'No results to display.';
   /* Field: Field tables: conduit_result_drupal_item=>Value */
   $handler->display->display_options['fields']['conduit_result_drupal_item_value_raw']['id'] = 'conduit_result_drupal_item_value_raw';
   $handler->display->display_options['fields']['conduit_result_drupal_item_value_raw']['table'] = 'field_data_conduit_result_drupal_item';
@@ -159,7 +166,7 @@ function drupal_plumber_views_default_views() {
   $handler->display->display_options['menu']['type'] = 'tab';
   $handler->display->display_options['menu']['title'] = 'Tests';
   $handler->display->display_options['menu']['weight'] = '0';
-  $translatables['plumber_tests'] = array(
+  $translatables['drupal_plumber_tests'] = array(
     t('Defaults'),
     t('more'),
     t('Apply'),
@@ -170,6 +177,8 @@ function drupal_plumber_views_default_views() {
     t('Items per page'),
     t('- All -'),
     t('Offset'),
+    t('No results'),
+    t('No results to display.'),
     t('Test'),
     t('node/!1?test=[conduit_result_drupal_item_value_raw]'),
     t('Pass'),
@@ -205,14 +214,14 @@ function drupal_plumber_views_default_views() {
   $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all'] = 0;
   $handler->display->display_options['style_plugin'] = 'table';
   $handler->display->display_options['style_options']['grouping'] = 'conduit_result_drupal_summary_value_raw';
+  $handler->display->display_options['style_options']['row_class'] = 'drupal-plumber-[conduit_result_drupal_type_value_raw]';
   $handler->display->display_options['style_options']['columns'] = array(
     'conduit_result_drupal_summary_value_raw' => 'conduit_result_drupal_summary_value_raw',
-    'conduit_result_drupal_delta_value_raw' => 'conduit_result_drupal_delta_value_raw',
-    'conduit_result_drupal_file_value_raw' => 'conduit_result_drupal_file_value_raw',
-    'conduit_result_drupal_function_value_raw' => 'conduit_result_drupal_function_value_raw',
-    'conduit_result_drupal_group_value_raw' => 'conduit_result_drupal_group_value_raw',
-    'conduit_result_drupal_line_value_raw' => 'conduit_result_drupal_line_value_raw',
     'conduit_result_drupal_message_value_raw' => 'conduit_result_drupal_message_value_raw',
+    'conduit_result_drupal_group_value_raw' => 'conduit_result_drupal_group_value_raw',
+    'conduit_result_drupal_file_value_raw' => 'conduit_result_drupal_file_value_raw',
+    'conduit_result_drupal_line_value_raw' => 'conduit_result_drupal_line_value_raw',
+    'conduit_result_drupal_function_value_raw' => 'conduit_result_drupal_function_value_raw',
     'conduit_result_drupal_type_value_raw' => 'conduit_result_drupal_type_value_raw',
   );
   $handler->display->display_options['style_options']['default'] = '-1';
@@ -223,19 +232,7 @@ function drupal_plumber_views_default_views() {
       'align' => '',
       'separator' => '',
     ),
-    'conduit_result_drupal_delta_value_raw' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-    ),
-    'conduit_result_drupal_file_value_raw' => array(
-      'sortable' => 0,
-      'default_sort_order' => 'asc',
-      'align' => '',
-      'separator' => '',
-    ),
-    'conduit_result_drupal_function_value_raw' => array(
+    'conduit_result_drupal_message_value_raw' => array(
       'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -247,13 +244,19 @@ function drupal_plumber_views_default_views() {
       'align' => '',
       'separator' => '',
     ),
+    'conduit_result_drupal_file_value_raw' => array(
+      'sortable' => 0,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+    ),
     'conduit_result_drupal_line_value_raw' => array(
       'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
     ),
-    'conduit_result_drupal_message_value_raw' => array(
+    'conduit_result_drupal_function_value_raw' => array(
       'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -268,6 +271,13 @@ function drupal_plumber_views_default_views() {
   );
   $handler->display->display_options['style_options']['override'] = 0;
   $handler->display->display_options['style_options']['sticky'] = 0;
+  /* Empty text: Global: Text area */
+  $handler->display->display_options['empty']['area']['id'] = 'area';
+  $handler->display->display_options['empty']['area']['table'] = 'views';
+  $handler->display->display_options['empty']['area']['field'] = 'area';
+  $handler->display->display_options['empty']['area']['label'] = 'No results';
+  $handler->display->display_options['empty']['area']['empty'] = FALSE;
+  $handler->display->display_options['empty']['area']['content'] = 'No results to display.';
   /* Field: Field tables: conduit_result_drupal_summary=>Value */
   $handler->display->display_options['fields']['conduit_result_drupal_summary_value_raw']['id'] = 'conduit_result_drupal_summary_value_raw';
   $handler->display->display_options['fields']['conduit_result_drupal_summary_value_raw']['table'] = 'field_data_conduit_result_drupal_summary';
@@ -432,6 +442,8 @@ function drupal_plumber_views_default_views() {
     t('Items per page'),
     t('- All -'),
     t('Offset'),
+    t('No results'),
+    t('No results to display.'),
     t('Message'),
     t('Group'),
     t('File'),
