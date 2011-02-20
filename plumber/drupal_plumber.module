@@ -20,17 +20,23 @@ function drupal_plumber_conduit_validate(array $properties) {
   conduit_drupal_conduit_validate($properties);
   extract($properties);
 
-  if (isset($scan) && drupal_plumber_scan_load($properties['scan']) === FALSE) {
-    conduit_validate_error('scan', t('must point to scan job'));
-  }
-
-  if (!is_array($classes)) {
-    conduit_validate_error('classes', t('must be an array'));
+  if (isset($scan)) {
+    if (!drupal_plumber_scan_load($properties['scan'])) {
+      conduit_validate_error('scan', t('must point to scan job that contains classes'));
+    }
   }
   else {
-    foreach ($classes as $index => $class) {
-      if (preg_match('/\s/', $class)) {
-        conduit_validate_error('classes', t('may not contain spaces'), $index);
+    if (!is_array($classes)) {
+      conduit_validate_error('classes', t('must be an array'));
+    }
+    elseif (!$classes) {
+      conduit_validate_error('classes', t('cannot be empty'));
+    }
+    else {
+      foreach ($classes as $index => $class) {
+        if (preg_match('/\s/', $class)) {
+          conduit_validate_error('classes', t('may not contain spaces'), $index);
+        }
       }
     }
   }
@@ -97,7 +103,7 @@ function drupal_plumber_conduit_queue_build(array $properties) {
  *   List of classes or FALSE.
  */
 function drupal_plumber_scan_load($scan_id) {
-  if ($scan = current(field_suppress_entity_load_unsuppressed('node', array($scan_id)))) {
+  if (($scan = current(field_suppress_entity_load_unsuppressed('node', array($scan_id)))) && isset($scan->conduit_result_drupal_scan_list)) {
     $list = $scan->conduit_result_drupal_scan_list;
     $list = isset($list[LANGUAGE_NONE]) ? $list[LANGUAGE_NONE] : array();
     $classes = array();
