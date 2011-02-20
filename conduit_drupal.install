@@ -254,3 +254,26 @@ function conduit_drupal_install_instances_job($type) {
   }
   return conduit_install_instances_job($type) + $instances;
 }
+
+/**
+ * Install a views filter block into sidebar_first.
+ *
+ * @param $view_name
+ *   Name of view whose filter block is to be installed.
+ */
+function conduit_drupal_install_block($view_name) {
+  module_load_include('admin.inc', 'block');
+  $form_state['values'] = array(
+    'blocks' => array(),
+    'op' => 'Save blocks',
+  );
+  $theme = variable_get('theme_default');
+  $blocks = block_admin_display_prepare_blocks($theme);
+  foreach ($blocks as $block) {
+    if ($block['info'] == "Exposed form: $view_name-default") {
+      $form_state['values']['blocks']['views_' . $block['delta']] = array('region' => 'sidebar_first');
+      break;
+    }
+  }
+  drupal_form_submit('block_admin_display_form', $form_state, $blocks, $theme);
+}

@@ -208,6 +208,7 @@ function drupal_plumber_views_default_views() {
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
+  $handler->display->display_options['exposed_form']['options']['submit_button'] = 'Filter';
   $handler->display->display_options['pager']['type'] = 'full';
   $handler->display->display_options['pager']['options']['items_per_page'] = '100';
   $handler->display->display_options['pager']['options']['offset'] = '0';
@@ -272,6 +273,7 @@ function drupal_plumber_views_default_views() {
   );
   $handler->display->display_options['style_options']['override'] = 0;
   $handler->display->display_options['style_options']['sticky'] = 0;
+  $handler->display->display_options['exposed_block'] = TRUE;
   /* Empty text: Global: Text area */
   $handler->display->display_options['empty']['area']['id'] = 'area';
   $handler->display->display_options['empty']['area']['table'] = 'views';
@@ -437,7 +439,7 @@ function drupal_plumber_views_default_views() {
   $translatables['drupal_plumber_result'] = array(
     t('Defaults'),
     t('more'),
-    t('Apply'),
+    t('Filter'),
     t('Reset'),
     t('Sort By'),
     t('Asc'),
