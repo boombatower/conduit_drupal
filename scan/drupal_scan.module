@@ -71,3 +71,13 @@ function drupal_scan_views_api() {
     'api' => 3,
   );
 }
+
+/**
+ * Implements hook_views_pre_render().
+ */
+function drupal_scan_views_pre_render($view) {
+  if (strpos($view->name, 'drupal_scan') === 0) {
+    // Add conduit_drupal css to all drupal_scan views.
+    drupal_add_css(drupal_get_path('module', 'conduit_drupal') . '/conduit_drupal.css');
+  }
+}

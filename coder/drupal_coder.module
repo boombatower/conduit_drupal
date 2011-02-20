@@ -91,3 +91,13 @@ function drupal_coder_views_api() {
     'api' => 3,
   );
 }
+
+/**
+ * Implements hook_views_pre_render().
+ */
+function drupal_coder_views_pre_render($view) {
+  if (strpos($view->name, 'drupal_coder') === 0) {
+    // Add conduit_drupal css to all drupal_coder views.
+    drupal_add_css(drupal_get_path('module', 'conduit_drupal') . '/conduit_drupal.css');
+  }
+}

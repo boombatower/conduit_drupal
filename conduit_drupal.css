@@ -1,0 +1,48 @@
+/**
+ * @author Jimmy Berry ("boombatower", http://drupal.org/user/214218)
+ */
+
+.conduit-drupal .views-table {
+  margin-top: 30px;
+  border: 1px solid;
+  border-color: #D3E7F4;
+}
+
+.conduit-drupal caption {
+  text-align: left;
+  font-size: 120%;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.conduit-drupal .views-field-conduit-result-drupal-type-value-raw {
+  width: 60px;
+}
+.conduit-drupal .views-field-conduit-result-drupal-line-value-raw {
+  width: 35px;
+}
+.conduit-drupal .views-field-conduit-result-drupal-group-value-raw {
+  width: 60px;
+}
+.conduit-drupal .views-field-conduit-result-drupal-file-value-raw {
+  width: 250px;
+}
+.conduit-drupal .views-field-conduit-result-drupal-function-value-raw {
+  width: 250px;
+}
+
+.views-field-conduit-result-drupal-type-0-value-raw,
+.views-field-conduit-result-drupal-type-1-value-raw,
+.views-field-conduit-result-drupal-type-2-value-raw {
+  width: 70px;
+  text-align: right;
+}
+
+/* Non-generic */
+#edit-submit-drupal-coder-result, #edit-submit-drupal-plumber-result {
+  margin-top: 0;
+}
+
+.view-drupal-scan-result td {
+  border-left: 2px solid #eeeeee;
+}
