@@ -203,6 +203,7 @@ function drupal_plumber_views_default_views() {
 
   /* Display: Defaults */
   $handler = $view->new_display('default', 'Defaults', 'default');
+  $handler->display->display_options['css_class'] = 'conduit-drupal';
   $handler->display->display_options['access']['type'] = 'none';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
@@ -338,8 +339,9 @@ function drupal_plumber_views_default_views() {
   $handler->display->display_options['fields']['conduit_result_drupal_file_value_raw']['alter']['alter_text'] = 0;
   $handler->display->display_options['fields']['conduit_result_drupal_file_value_raw']['alter']['make_link'] = 0;
   $handler->display->display_options['fields']['conduit_result_drupal_file_value_raw']['alter']['absolute'] = 0;
-  $handler->display->display_options['fields']['conduit_result_drupal_file_value_raw']['alter']['trim'] = 0;
-  $handler->display->display_options['fields']['conduit_result_drupal_file_value_raw']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['conduit_result_drupal_file_value_raw']['alter']['trim'] = 1;
+  $handler->display->display_options['fields']['conduit_result_drupal_file_value_raw']['alter']['max_length'] = '50';
+  $handler->display->display_options['fields']['conduit_result_drupal_file_value_raw']['alter']['word_boundary'] = 0;
   $handler->display->display_options['fields']['conduit_result_drupal_file_value_raw']['alter']['ellipsis'] = 1;
   $handler->display->display_options['fields']['conduit_result_drupal_file_value_raw']['alter']['strip_tags'] = 0;
   $handler->display->display_options['fields']['conduit_result_drupal_file_value_raw']['alter']['html'] = 0;
@@ -372,8 +374,9 @@ function drupal_plumber_views_default_views() {
   $handler->display->display_options['fields']['conduit_result_drupal_function_value_raw']['alter']['alter_text'] = 0;
   $handler->display->display_options['fields']['conduit_result_drupal_function_value_raw']['alter']['make_link'] = 0;
   $handler->display->display_options['fields']['conduit_result_drupal_function_value_raw']['alter']['absolute'] = 0;
-  $handler->display->display_options['fields']['conduit_result_drupal_function_value_raw']['alter']['trim'] = 0;
-  $handler->display->display_options['fields']['conduit_result_drupal_function_value_raw']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['conduit_result_drupal_function_value_raw']['alter']['trim'] = 1;
+  $handler->display->display_options['fields']['conduit_result_drupal_function_value_raw']['alter']['max_length'] = '50';
+  $handler->display->display_options['fields']['conduit_result_drupal_function_value_raw']['alter']['word_boundary'] = 0;
   $handler->display->display_options['fields']['conduit_result_drupal_function_value_raw']['alter']['ellipsis'] = 1;
   $handler->display->display_options['fields']['conduit_result_drupal_function_value_raw']['alter']['strip_tags'] = 0;
   $handler->display->display_options['fields']['conduit_result_drupal_function_value_raw']['alter']['html'] = 0;
