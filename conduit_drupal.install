@@ -43,7 +43,7 @@ function conduit_drupal_install_group($type, $primary_field = NULL) {
     'format_settings' => array(
       'instance_settings' => array(
         'primary_field' => $primary_field ? $primary_field : 'conduit_result_drupal_summary',
-        'field_suppress' => 'load',
+        'field_suppress' => 'always',
       ),
     ),
   );
