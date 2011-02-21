@@ -54,6 +54,13 @@ function conduit_drupal_conduit_init($node, $chunk_count) {
  */
 function conduit_drupal_conduit_result($node, $delta, $result) {
   $info = conduit_job_info($node->type);
+  // @TODO Grab the totals from the previous chunks and add them to the totals
+  // for the current chunk. Replace this with view sums once added.
+  if (preg_match('/(\d+) \w+, (\d+) \w+, and (\d+) \w+/', $node->conduit_summary[LANGUAGE_NONE][0]['value'], $match)) {
+    $result['#total'][0] += $match[1];
+    $result['#total'][1] += $match[2];
+    $result['#total'][2] += $match[3];
+  }
   $node->conduit_summary[LANGUAGE_NONE][0]['value'] = module_invoke($info['module'], 'conduit_drupal_result_message', $result['#total']);
   unset($result['#total']);
 
