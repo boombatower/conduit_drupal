@@ -34,6 +34,7 @@ function drupal_plumber_views_default_views() {
   $handler->display->display_options['pager']['options']['id'] = '0';
   $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all'] = 0;
   $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['row_class'] = 't0[conduit_result_drupal_type_0_value_raw] t1[conduit_result_drupal_type_1_value_raw] t2[conduit_result_drupal_type_2_value_raw]';
   $handler->display->display_options['style_options']['columns'] = array(
     'conduit_result_drupal_item_value_raw' => 'conduit_result_drupal_item_value_raw',
     'conduit_result_drupal_type_0_value_raw' => 'conduit_result_drupal_type_0_value_raw',
