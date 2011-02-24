@@ -132,7 +132,7 @@ function conduit_drupal_block_info_alter(&$blocks, $theme, $code_blocks) {
         $block['status'] = 1;
         $block['region'] = 'sidebar_first';
         $block['weight'] = -9;
-        $block['pages'] = 'node/add/*';
+        $block['pages'] = implode("\n", array('node/add/*', 'node/*/edit', 'node/*/properties'));
       }
       else {
         // Restrict filter blocks to the content type they are related to.
