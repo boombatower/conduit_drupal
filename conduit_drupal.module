@@ -142,3 +142,12 @@ function conduit_drupal_block_info_alter(&$blocks, $theme, $code_blocks) {
     }
   }
 }
+
+/**
+ * Implements hook_form_FORM_ID_alter(): views_exposed_form.
+ */
+function conduit_drupal_form_views_exposed_form_alter(&$form, &$form_state) {
+  if (isset($form['#info']['filter-conduit_result_drupal_item_value_raw'])) {
+    $form['#action'] = '/' . current_path();
+  }
+}
