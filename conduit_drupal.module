@@ -89,6 +89,10 @@ function conduit_drupal_conduit_result($node, $delta, $result) {
  * Implements hook_views_data_alter().
  */
 function conduit_drupal_views_data_alter(&$data) {
+  views_field_add_multi_join($data, 'conduit_result_drupal_type_0', 'conduit_result_drupal_item', 'field_revision');
+  views_field_add_multi_join($data, 'conduit_result_drupal_type_1', 'conduit_result_drupal_item', 'field_revision');
+  views_field_add_multi_join($data, 'conduit_result_drupal_type_2', 'conduit_result_drupal_item', 'field_revision');
+  // @todo Retain for testing -- delete for production unless we want views on current table.
   views_field_add_multi_join($data, 'conduit_result_drupal_type_0', 'conduit_result_drupal_item');
   views_field_add_multi_join($data, 'conduit_result_drupal_type_1', 'conduit_result_drupal_item');
   views_field_add_multi_join($data, 'conduit_result_drupal_type_2', 'conduit_result_drupal_item');
@@ -97,18 +101,20 @@ function conduit_drupal_views_data_alter(&$data) {
 /**
  * Implements hook_views_field_add_multi_join_alter().
  */
-function conduit_drupal_views_field_add_multi_join_alter(&$join, &$base_field, &$join_field) {
-  // If the field is joining to summary table proceed.
+function conduit_drupal_views_field_add_multi_join_alter(&$join, &$context) {
+  extract($context);
+
+  // If the field is joining to summary table, then proceed.
   if ($join_field == 'conduit_result_drupal_summary') {
     // If the delta field is being joined to summary then join on the delta
     // fields value instead of it's delta column and perform a left join since
     // there will always be summaries, but not necessarily messages. If joining
     // to any other field then join to the delta field table.
     if ($base_field == 'conduit_result_drupal_delta') {
-      $join['field'][3] = 'conduit_result_drupal_delta_value';
+      $join['field']['delta'] = 'conduit_result_drupal_delta_value';
     }
     elseif ($base_field != 'conduit_result_drupal_item' && strpos($base_field, 'conduit_result_drupal_type_') === FALSE) {
-      $join['left_table'] = 'field_data_conduit_result_drupal_delta';
+      $join['left_table'] = $base_type . '_conduit_result_drupal_delta';
     }
   }
 }
