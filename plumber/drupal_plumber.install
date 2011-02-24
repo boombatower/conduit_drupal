@@ -13,7 +13,6 @@ function drupal_plumber_install() {
   conduit_install_node_type('conduit_job_drupal_plumber');
   field_helper_install_all('drupal_plumber');
   conduit_drupal_install_group('conduit_job_drupal_plumber');
-  conduit_drupal_install_block('drupal_plumber_result');
 }
 
 /**

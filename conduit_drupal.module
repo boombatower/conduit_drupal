@@ -112,3 +112,33 @@ function conduit_drupal_views_field_add_multi_join_alter(&$join, &$base_field, &
     }
   }
 }
+
+/**
+ * Implements hook_block_info_alter().
+ */
+function conduit_drupal_block_info_alter(&$blocks, $theme, $code_blocks) {
+  foreach ($blocks['views'] as &$block) {
+    if (strpos($block['info'], 'drupal_coder_result') !== FALSE) $type = 'conduit_job_drupal_coder';
+    if (strpos($block['info'], 'drupal_plumber_result') !== FALSE) $type = 'conduit_job_drupal_plumber';
+    if (isset($type)) {
+      if (empty($block['status'])) {
+        $block['status'] = 1;
+        $block['region'] = 'sidebar_first';
+        $block['weight'] = -9;
+        $block['pages'] = 'node/add/*';
+      }
+      else {
+        // Restrict filter blocks to the content type they are related to.
+        $form_state = array(
+          'values' => array(
+            'types' => array($type => $type),
+            'op' => 'Save block',
+          ),
+        );
+        module_load_include('admin.inc', 'block');
+        drupal_form_submit('block_admin_configure', $form_state, $block['module'], $block['delta']);
+        drupal_get_messages();
+      }
+    }
+  }
+}

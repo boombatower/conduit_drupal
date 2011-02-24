@@ -13,7 +13,6 @@ function drupal_coder_install() {
   conduit_install_node_type('conduit_job_drupal_coder');
   field_helper_install_all('drupal_coder');
   conduit_drupal_install_group('conduit_job_drupal_coder');
-  conduit_drupal_install_block('drupal_coder_result');
 }
 
 /**
