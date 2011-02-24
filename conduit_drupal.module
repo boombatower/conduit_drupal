@@ -118,6 +118,7 @@ function conduit_drupal_views_field_add_multi_join_alter(&$join, &$base_field, &
  */
 function conduit_drupal_block_info_alter(&$blocks, $theme, $code_blocks) {
   foreach ($blocks['views'] as &$block) {
+    unset($type);
     if (strpos($block['info'], 'drupal_coder_result') !== FALSE) $type = 'conduit_job_drupal_coder';
     if (strpos($block['info'], 'drupal_plumber_result') !== FALSE) $type = 'conduit_job_drupal_plumber';
     if (isset($type)) {
