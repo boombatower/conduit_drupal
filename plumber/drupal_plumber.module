@@ -21,7 +21,7 @@ function drupal_plumber_conduit_validate(array $properties) {
   extract($properties);
 
   if (isset($scan)) {
-    if (!drupal_plumber_scan_load($properties['scan'])) {
+    if (!drupal_plumber_scan_load($scan)) {
       conduit_validate_error('scan', t('must point to scan job that contains classes'));
     }
   }
@@ -42,7 +42,7 @@ function drupal_plumber_conduit_validate(array $properties) {
   }
 
   if (!is_array($statuses)) {
-    conduit_validate_error('classes', t('must be an array'));
+    conduit_validate_error('$statuses', t('must be an array'));
   }
   else {
     foreach ($statuses as $index => $status) {
