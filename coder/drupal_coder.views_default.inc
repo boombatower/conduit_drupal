@@ -16,7 +16,7 @@ function drupal_coder_views_default_views() {
   $view->name = 'drupal_coder_files';
   $view->description = '';
   $view->tag = '';
-  $view->base_table = 'field_data_conduit_result_drupal_item';
+  $view->base_table = 'field_revision_conduit_result_drupal_item';
   $view->human_name = 'Coder files';
   $view->core = 7;
   $view->api_version = '3.0-alpha1';
@@ -77,9 +77,9 @@ function drupal_coder_views_default_views() {
   $handler->display->display_options['empty']['area']['label'] = 'No results';
   $handler->display->display_options['empty']['area']['empty'] = FALSE;
   $handler->display->display_options['empty']['area']['content'] = 'No results to display.';
-  /* Field: Field tables: conduit_result_drupal_item=>Value */
+  /* Field: Revision tables: conduit_result_drupal_item=>Delta */
   $handler->display->display_options['fields']['conduit_result_drupal_item_value_raw']['id'] = 'conduit_result_drupal_item_value_raw';
-  $handler->display->display_options['fields']['conduit_result_drupal_item_value_raw']['table'] = 'field_data_conduit_result_drupal_item';
+  $handler->display->display_options['fields']['conduit_result_drupal_item_value_raw']['table'] = 'field_revision_conduit_result_drupal_item';
   $handler->display->display_options['fields']['conduit_result_drupal_item_value_raw']['field'] = 'conduit_result_drupal_item_value_raw';
   $handler->display->display_options['fields']['conduit_result_drupal_item_value_raw']['label'] = 'File';
   $handler->display->display_options['fields']['conduit_result_drupal_item_value_raw']['alter']['alter_text'] = 0;
@@ -95,9 +95,9 @@ function drupal_coder_views_default_views() {
   $handler->display->display_options['fields']['conduit_result_drupal_item_value_raw']['element_default_classes'] = 1;
   $handler->display->display_options['fields']['conduit_result_drupal_item_value_raw']['hide_empty'] = 0;
   $handler->display->display_options['fields']['conduit_result_drupal_item_value_raw']['empty_zero'] = 0;
-  /* Field: Field tables: conduit_result_drupal_type_0=>Value */
+  /* Field: Revision tables: conduit_result_drupal_type_0=>Delta */
   $handler->display->display_options['fields']['conduit_result_drupal_type_0_value_raw']['id'] = 'conduit_result_drupal_type_0_value_raw';
-  $handler->display->display_options['fields']['conduit_result_drupal_type_0_value_raw']['table'] = 'field_data_conduit_result_drupal_type_0';
+  $handler->display->display_options['fields']['conduit_result_drupal_type_0_value_raw']['table'] = 'field_revision_conduit_result_drupal_type_0';
   $handler->display->display_options['fields']['conduit_result_drupal_type_0_value_raw']['field'] = 'conduit_result_drupal_type_0_value_raw';
   $handler->display->display_options['fields']['conduit_result_drupal_type_0_value_raw']['label'] = 'Critical';
   $handler->display->display_options['fields']['conduit_result_drupal_type_0_value_raw']['alter']['alter_text'] = 0;
@@ -112,9 +112,9 @@ function drupal_coder_views_default_views() {
   $handler->display->display_options['fields']['conduit_result_drupal_type_0_value_raw']['element_default_classes'] = 1;
   $handler->display->display_options['fields']['conduit_result_drupal_type_0_value_raw']['hide_empty'] = 0;
   $handler->display->display_options['fields']['conduit_result_drupal_type_0_value_raw']['empty_zero'] = 0;
-  /* Field: Field tables: conduit_result_drupal_type_1=>Value */
+  /* Field: Revision tables: conduit_result_drupal_type_1=>Delta */
   $handler->display->display_options['fields']['conduit_result_drupal_type_1_value_raw']['id'] = 'conduit_result_drupal_type_1_value_raw';
-  $handler->display->display_options['fields']['conduit_result_drupal_type_1_value_raw']['table'] = 'field_data_conduit_result_drupal_type_1';
+  $handler->display->display_options['fields']['conduit_result_drupal_type_1_value_raw']['table'] = 'field_revision_conduit_result_drupal_type_1';
   $handler->display->display_options['fields']['conduit_result_drupal_type_1_value_raw']['field'] = 'conduit_result_drupal_type_1_value_raw';
   $handler->display->display_options['fields']['conduit_result_drupal_type_1_value_raw']['label'] = 'Normal';
   $handler->display->display_options['fields']['conduit_result_drupal_type_1_value_raw']['alter']['alter_text'] = 0;
@@ -129,9 +129,9 @@ function drupal_coder_views_default_views() {
   $handler->display->display_options['fields']['conduit_result_drupal_type_1_value_raw']['element_default_classes'] = 1;
   $handler->display->display_options['fields']['conduit_result_drupal_type_1_value_raw']['hide_empty'] = 0;
   $handler->display->display_options['fields']['conduit_result_drupal_type_1_value_raw']['empty_zero'] = 0;
-  /* Field: Field tables: conduit_result_drupal_type_2=>Value */
+  /* Field: Revision tables: conduit_result_drupal_type_2=>Delta */
   $handler->display->display_options['fields']['conduit_result_drupal_type_2_value_raw']['id'] = 'conduit_result_drupal_type_2_value_raw';
-  $handler->display->display_options['fields']['conduit_result_drupal_type_2_value_raw']['table'] = 'field_data_conduit_result_drupal_type_2';
+  $handler->display->display_options['fields']['conduit_result_drupal_type_2_value_raw']['table'] = 'field_revision_conduit_result_drupal_type_2';
   $handler->display->display_options['fields']['conduit_result_drupal_type_2_value_raw']['field'] = 'conduit_result_drupal_type_2_value_raw';
   $handler->display->display_options['fields']['conduit_result_drupal_type_2_value_raw']['label'] = 'Minor';
   $handler->display->display_options['fields']['conduit_result_drupal_type_2_value_raw']['alter']['alter_text'] = 0;
@@ -146,24 +146,34 @@ function drupal_coder_views_default_views() {
   $handler->display->display_options['fields']['conduit_result_drupal_type_2_value_raw']['element_default_classes'] = 1;
   $handler->display->display_options['fields']['conduit_result_drupal_type_2_value_raw']['hide_empty'] = 0;
   $handler->display->display_options['fields']['conduit_result_drupal_type_2_value_raw']['empty_zero'] = 0;
-  /* Argument: Field tables: conduit_result_drupal_item=>Entity id */
-  $handler->display->display_options['arguments']['entity_id_raw']['id'] = 'entity_id_raw';
-  $handler->display->display_options['arguments']['entity_id_raw']['table'] = 'field_data_conduit_result_drupal_item';
-  $handler->display->display_options['arguments']['entity_id_raw']['field'] = 'entity_id_raw';
-  $handler->display->display_options['arguments']['entity_id_raw']['default_action'] = 'not found';
-  $handler->display->display_options['arguments']['entity_id_raw']['style_plugin'] = 'default_summary';
-  $handler->display->display_options['arguments']['entity_id_raw']['default_argument_type'] = 'fixed';
-  $handler->display->display_options['arguments']['entity_id_raw']['validate_type'] = 'node';
-  $handler->display->display_options['arguments']['entity_id_raw']['validate_options']['types'] = array(
+  /* Argument: Revision tables: conduit_result_drupal_item=>Entity id */
+  $handler->display->display_options['arguments']['entity_id']['id'] = 'entity_id';
+  $handler->display->display_options['arguments']['entity_id']['table'] = 'field_revision_conduit_result_drupal_item';
+  $handler->display->display_options['arguments']['entity_id']['field'] = 'entity_id';
+  $handler->display->display_options['arguments']['entity_id']['default_action'] = 'not found';
+  $handler->display->display_options['arguments']['entity_id']['style_plugin'] = 'default_summary';
+  $handler->display->display_options['arguments']['entity_id']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['entity_id']['validate_type'] = 'node';
+  $handler->display->display_options['arguments']['entity_id']['validate_options']['types'] = array(
     'conduit_job_drupal_coder' => 'conduit_job_drupal_coder',
   );
-  $handler->display->display_options['arguments']['entity_id_raw']['validate_options']['access'] = '1';
-  $handler->display->display_options['arguments']['entity_id_raw']['break_phrase'] = 0;
-  $handler->display->display_options['arguments']['entity_id_raw']['not'] = 0;
+  $handler->display->display_options['arguments']['entity_id']['validate_options']['access'] = 0;
+  $handler->display->display_options['arguments']['entity_id']['break_phrase'] = 0;
+  $handler->display->display_options['arguments']['entity_id']['not'] = 0;
+  /* Argument: Revision tables: conduit_result_drupal_item=>Revision id */
+  $handler->display->display_options['arguments']['revision_id_raw']['id'] = 'revision_id_raw';
+  $handler->display->display_options['arguments']['revision_id_raw']['table'] = 'field_revision_conduit_result_drupal_item';
+  $handler->display->display_options['arguments']['revision_id_raw']['field'] = 'revision_id_raw';
+  $handler->display->display_options['arguments']['revision_id_raw']['default_action'] = 'not found';
+  $handler->display->display_options['arguments']['revision_id_raw']['style_plugin'] = 'default_summary';
+  $handler->display->display_options['arguments']['revision_id_raw']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['revision_id_raw']['validate_type'] = 'numeric';
+  $handler->display->display_options['arguments']['revision_id_raw']['break_phrase'] = 0;
+  $handler->display->display_options['arguments']['revision_id_raw']['not'] = 0;
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page_1');
-  $handler->display->display_options['path'] = 'node/%/files';
+  $handler->display->display_options['path'] = 'node/%/%/files';
   $handler->display->display_options['menu']['type'] = 'tab';
   $handler->display->display_options['menu']['title'] = 'Files';
   $handler->display->display_options['menu']['weight'] = '0';
@@ -196,7 +206,7 @@ function drupal_coder_views_default_views() {
   $view->name = 'drupal_coder_result';
   $view->description = '';
   $view->tag = '';
-  $view->base_table = 'field_data_conduit_result_drupal_summary';
+  $view->base_table = 'field_revision_conduit_result_drupal_summary';
   $view->human_name = 'Coder result';
   $view->core = 0;
   $view->api_version = '3.0-alpha1';
@@ -261,9 +271,9 @@ function drupal_coder_views_default_views() {
   $handler->display->display_options['empty']['area']['label'] = 'No results';
   $handler->display->display_options['empty']['area']['empty'] = FALSE;
   $handler->display->display_options['empty']['area']['content'] = 'No results to display.';
-  /* Field: Field tables: conduit_result_drupal_summary=>Value */
+  /* Field: Revision tables: conduit_result_drupal_summary=>Delta */
   $handler->display->display_options['fields']['conduit_result_drupal_summary_value_raw']['id'] = 'conduit_result_drupal_summary_value_raw';
-  $handler->display->display_options['fields']['conduit_result_drupal_summary_value_raw']['table'] = 'field_data_conduit_result_drupal_summary';
+  $handler->display->display_options['fields']['conduit_result_drupal_summary_value_raw']['table'] = 'field_revision_conduit_result_drupal_summary';
   $handler->display->display_options['fields']['conduit_result_drupal_summary_value_raw']['field'] = 'conduit_result_drupal_summary_value_raw';
   $handler->display->display_options['fields']['conduit_result_drupal_summary_value_raw']['label'] = '';
   $handler->display->display_options['fields']['conduit_result_drupal_summary_value_raw']['exclude'] = TRUE;
@@ -279,9 +289,9 @@ function drupal_coder_views_default_views() {
   $handler->display->display_options['fields']['conduit_result_drupal_summary_value_raw']['element_default_classes'] = 1;
   $handler->display->display_options['fields']['conduit_result_drupal_summary_value_raw']['hide_empty'] = 0;
   $handler->display->display_options['fields']['conduit_result_drupal_summary_value_raw']['empty_zero'] = 0;
-  /* Field: Field tables: conduit_result_drupal_type=>Value */
+  /* Field: Revision tables: conduit_result_drupal_type=>Delta */
   $handler->display->display_options['fields']['conduit_result_drupal_type_value_raw']['id'] = 'conduit_result_drupal_type_value_raw';
-  $handler->display->display_options['fields']['conduit_result_drupal_type_value_raw']['table'] = 'field_data_conduit_result_drupal_type';
+  $handler->display->display_options['fields']['conduit_result_drupal_type_value_raw']['table'] = 'field_revision_conduit_result_drupal_type';
   $handler->display->display_options['fields']['conduit_result_drupal_type_value_raw']['field'] = 'conduit_result_drupal_type_value_raw';
   $handler->display->display_options['fields']['conduit_result_drupal_type_value_raw']['label'] = 'Severity';
   $handler->display->display_options['fields']['conduit_result_drupal_type_value_raw']['alter']['alter_text'] = 0;
@@ -296,9 +306,9 @@ function drupal_coder_views_default_views() {
   $handler->display->display_options['fields']['conduit_result_drupal_type_value_raw']['element_default_classes'] = 1;
   $handler->display->display_options['fields']['conduit_result_drupal_type_value_raw']['hide_empty'] = 0;
   $handler->display->display_options['fields']['conduit_result_drupal_type_value_raw']['empty_zero'] = 0;
-  /* Field: Field tables: conduit_result_drupal_line=>Value */
+  /* Field: Revision tables: conduit_result_drupal_line=>Delta */
   $handler->display->display_options['fields']['conduit_result_drupal_line_value_raw']['id'] = 'conduit_result_drupal_line_value_raw';
-  $handler->display->display_options['fields']['conduit_result_drupal_line_value_raw']['table'] = 'field_data_conduit_result_drupal_line';
+  $handler->display->display_options['fields']['conduit_result_drupal_line_value_raw']['table'] = 'field_revision_conduit_result_drupal_line';
   $handler->display->display_options['fields']['conduit_result_drupal_line_value_raw']['field'] = 'conduit_result_drupal_line_value_raw';
   $handler->display->display_options['fields']['conduit_result_drupal_line_value_raw']['label'] = 'Line';
   $handler->display->display_options['fields']['conduit_result_drupal_line_value_raw']['alter']['alter_text'] = 0;
@@ -313,9 +323,9 @@ function drupal_coder_views_default_views() {
   $handler->display->display_options['fields']['conduit_result_drupal_line_value_raw']['element_default_classes'] = 1;
   $handler->display->display_options['fields']['conduit_result_drupal_line_value_raw']['hide_empty'] = 0;
   $handler->display->display_options['fields']['conduit_result_drupal_line_value_raw']['empty_zero'] = 0;
-  /* Field: Field tables: conduit_result_drupal_message=>Value */
+  /* Field: Revision tables: conduit_result_drupal_message=>Delta */
   $handler->display->display_options['fields']['conduit_result_drupal_message_value_raw']['id'] = 'conduit_result_drupal_message_value_raw';
-  $handler->display->display_options['fields']['conduit_result_drupal_message_value_raw']['table'] = 'field_data_conduit_result_drupal_message';
+  $handler->display->display_options['fields']['conduit_result_drupal_message_value_raw']['table'] = 'field_revision_conduit_result_drupal_message';
   $handler->display->display_options['fields']['conduit_result_drupal_message_value_raw']['field'] = 'conduit_result_drupal_message_value_raw';
   $handler->display->display_options['fields']['conduit_result_drupal_message_value_raw']['label'] = 'Message';
   $handler->display->display_options['fields']['conduit_result_drupal_message_value_raw']['alter']['alter_text'] = 0;
@@ -330,35 +340,45 @@ function drupal_coder_views_default_views() {
   $handler->display->display_options['fields']['conduit_result_drupal_message_value_raw']['element_default_classes'] = 1;
   $handler->display->display_options['fields']['conduit_result_drupal_message_value_raw']['hide_empty'] = 0;
   $handler->display->display_options['fields']['conduit_result_drupal_message_value_raw']['empty_zero'] = 0;
-  /* Sort criterion: Field tables: conduit_result_drupal_summary=>Value */
+  /* Sort criterion: Revision tables: conduit_result_drupal_summary=>Delta */
   $handler->display->display_options['sorts']['conduit_result_drupal_summary_value_raw']['id'] = 'conduit_result_drupal_summary_value_raw';
-  $handler->display->display_options['sorts']['conduit_result_drupal_summary_value_raw']['table'] = 'field_data_conduit_result_drupal_summary';
+  $handler->display->display_options['sorts']['conduit_result_drupal_summary_value_raw']['table'] = 'field_revision_conduit_result_drupal_summary';
   $handler->display->display_options['sorts']['conduit_result_drupal_summary_value_raw']['field'] = 'conduit_result_drupal_summary_value_raw';
-  /* Sort criterion: Field tables: conduit_result_drupal_line=>Value */
+  /* Sort criterion: Revision tables: conduit_result_drupal_line=>Delta */
   $handler->display->display_options['sorts']['conduit_result_drupal_line_value_raw']['id'] = 'conduit_result_drupal_line_value_raw';
-  $handler->display->display_options['sorts']['conduit_result_drupal_line_value_raw']['table'] = 'field_data_conduit_result_drupal_line';
+  $handler->display->display_options['sorts']['conduit_result_drupal_line_value_raw']['table'] = 'field_revision_conduit_result_drupal_line';
   $handler->display->display_options['sorts']['conduit_result_drupal_line_value_raw']['field'] = 'conduit_result_drupal_line_value_raw';
-  /* Sort criterion: Field tables: conduit_result_drupal_message=>Value */
+  /* Sort criterion: Revision tables: conduit_result_drupal_message=>Delta */
   $handler->display->display_options['sorts']['conduit_result_drupal_message_value_raw']['id'] = 'conduit_result_drupal_message_value_raw';
-  $handler->display->display_options['sorts']['conduit_result_drupal_message_value_raw']['table'] = 'field_data_conduit_result_drupal_message';
+  $handler->display->display_options['sorts']['conduit_result_drupal_message_value_raw']['table'] = 'field_revision_conduit_result_drupal_message';
   $handler->display->display_options['sorts']['conduit_result_drupal_message_value_raw']['field'] = 'conduit_result_drupal_message_value_raw';
-  /* Argument: Field tables: conduit_result_drupal_summary=>Entity id */
-  $handler->display->display_options['arguments']['entity_id_raw']['id'] = 'entity_id_raw';
-  $handler->display->display_options['arguments']['entity_id_raw']['table'] = 'field_data_conduit_result_drupal_summary';
-  $handler->display->display_options['arguments']['entity_id_raw']['field'] = 'entity_id_raw';
-  $handler->display->display_options['arguments']['entity_id_raw']['default_action'] = 'not found';
-  $handler->display->display_options['arguments']['entity_id_raw']['style_plugin'] = 'default_summary';
-  $handler->display->display_options['arguments']['entity_id_raw']['default_argument_type'] = 'fixed';
-  $handler->display->display_options['arguments']['entity_id_raw']['validate_type'] = 'node';
-  $handler->display->display_options['arguments']['entity_id_raw']['validate_options']['types'] = array(
+  /* Argument: Revision tables: conduit_result_drupal_summary=>Entity id */
+  $handler->display->display_options['arguments']['entity_id']['id'] = 'entity_id';
+  $handler->display->display_options['arguments']['entity_id']['table'] = 'field_revision_conduit_result_drupal_summary';
+  $handler->display->display_options['arguments']['entity_id']['field'] = 'entity_id';
+  $handler->display->display_options['arguments']['entity_id']['default_action'] = 'not found';
+  $handler->display->display_options['arguments']['entity_id']['style_plugin'] = 'default_summary';
+  $handler->display->display_options['arguments']['entity_id']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['entity_id']['validate_type'] = 'node';
+  $handler->display->display_options['arguments']['entity_id']['validate_options']['types'] = array(
     'conduit_job_drupal_coder' => 'conduit_job_drupal_coder',
   );
-  $handler->display->display_options['arguments']['entity_id_raw']['validate_options']['access'] = 0;
-  $handler->display->display_options['arguments']['entity_id_raw']['break_phrase'] = 0;
-  $handler->display->display_options['arguments']['entity_id_raw']['not'] = 0;
-  /* Filter: Field tables: conduit_result_drupal_item=>Value */
+  $handler->display->display_options['arguments']['entity_id']['validate_options']['access'] = 0;
+  $handler->display->display_options['arguments']['entity_id']['break_phrase'] = 0;
+  $handler->display->display_options['arguments']['entity_id']['not'] = 0;
+  /* Argument: Revision tables: conduit_result_drupal_summary=>Revision id */
+  $handler->display->display_options['arguments']['revision_id_raw']['id'] = 'revision_id_raw';
+  $handler->display->display_options['arguments']['revision_id_raw']['table'] = 'field_revision_conduit_result_drupal_summary';
+  $handler->display->display_options['arguments']['revision_id_raw']['field'] = 'revision_id_raw';
+  $handler->display->display_options['arguments']['revision_id_raw']['default_action'] = 'not found';
+  $handler->display->display_options['arguments']['revision_id_raw']['style_plugin'] = 'default_summary';
+  $handler->display->display_options['arguments']['revision_id_raw']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['revision_id_raw']['validate_type'] = 'numeric';
+  $handler->display->display_options['arguments']['revision_id_raw']['break_phrase'] = 0;
+  $handler->display->display_options['arguments']['revision_id_raw']['not'] = 0;
+  /* Filter: Revision tables: conduit_result_drupal_item=>Delta */
   $handler->display->display_options['filters']['conduit_result_drupal_item_value_raw']['id'] = 'conduit_result_drupal_item_value_raw';
-  $handler->display->display_options['filters']['conduit_result_drupal_item_value_raw']['table'] = 'field_data_conduit_result_drupal_item';
+  $handler->display->display_options['filters']['conduit_result_drupal_item_value_raw']['table'] = 'field_revision_conduit_result_drupal_item';
   $handler->display->display_options['filters']['conduit_result_drupal_item_value_raw']['field'] = 'conduit_result_drupal_item_value_raw';
   $handler->display->display_options['filters']['conduit_result_drupal_item_value_raw']['operator'] = 'contains';
   $handler->display->display_options['filters']['conduit_result_drupal_item_value_raw']['exposed'] = TRUE;
@@ -367,6 +387,13 @@ function drupal_coder_views_default_views() {
   $handler->display->display_options['filters']['conduit_result_drupal_item_value_raw']['expose']['use_operator'] = FALSE;
   $handler->display->display_options['filters']['conduit_result_drupal_item_value_raw']['expose']['identifier'] = 'file';
   $handler->display->display_options['filters']['conduit_result_drupal_item_value_raw']['expose']['single'] = TRUE;
+
+  /* Display: Page */
+  $handler = $view->new_display('page', 'Page', 'page_1');
+  $handler->display->display_options['path'] = 'node/%/%/results';
+  $handler->display->display_options['menu']['type'] = 'tab';
+  $handler->display->display_options['menu']['title'] = 'Results';
+  $handler->display->display_options['menu']['weight'] = '0';
   $translatables['drupal_coder_result'] = array(
     t('Defaults'),
     t('more'),
@@ -385,6 +412,7 @@ function drupal_coder_views_default_views() {
     t('Message'),
     t('All'),
     t('File'),
+    t('Page'),
   );
 
   $views[$view->name] = $view;

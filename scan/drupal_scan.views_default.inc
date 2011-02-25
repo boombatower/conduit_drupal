@@ -16,8 +16,8 @@ function drupal_scan_views_default_views() {
   $view->name = 'drupal_scan_result';
   $view->description = '';
   $view->tag = '';
-  $view->base_table = 'field_data_conduit_result_drupal_scan_list';
-  $view->human_name = '';
+  $view->base_table = 'field_revision_conduit_result_drupal_scan_list';
+  $view->human_name = 'Scan result';
   $view->core = 0;
   $view->api_version = '3.0-alpha1';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
@@ -38,7 +38,7 @@ function drupal_scan_views_default_views() {
   $handler->display->display_options['row_plugin'] = 'fields';
   /* Field: Class */
   $handler->display->display_options['fields']['conduit_result_drupal_scan_list_value_raw']['id'] = 'conduit_result_drupal_scan_list_value_raw';
-  $handler->display->display_options['fields']['conduit_result_drupal_scan_list_value_raw']['table'] = 'field_data_conduit_result_drupal_scan_list';
+  $handler->display->display_options['fields']['conduit_result_drupal_scan_list_value_raw']['table'] = 'field_revision_conduit_result_drupal_scan_list';
   $handler->display->display_options['fields']['conduit_result_drupal_scan_list_value_raw']['field'] = 'conduit_result_drupal_scan_list_value_raw';
   $handler->display->display_options['fields']['conduit_result_drupal_scan_list_value_raw']['ui_name'] = 'Class';
   $handler->display->display_options['fields']['conduit_result_drupal_scan_list_value_raw']['label'] = '';
@@ -55,17 +55,34 @@ function drupal_scan_views_default_views() {
   $handler->display->display_options['fields']['conduit_result_drupal_scan_list_value_raw']['element_default_classes'] = 1;
   $handler->display->display_options['fields']['conduit_result_drupal_scan_list_value_raw']['hide_empty'] = 0;
   $handler->display->display_options['fields']['conduit_result_drupal_scan_list_value_raw']['empty_zero'] = 0;
-  /* Sort criterion: Field tables: conduit_result_drupal_scan_list=>Value */
+  /* Sort criterion: Revision tables: conduit_result_drupal_scan_list=>Value */
   $handler->display->display_options['sorts']['conduit_result_drupal_scan_list_value_raw']['id'] = 'conduit_result_drupal_scan_list_value_raw';
-  $handler->display->display_options['sorts']['conduit_result_drupal_scan_list_value_raw']['table'] = 'field_data_conduit_result_drupal_scan_list';
+  $handler->display->display_options['sorts']['conduit_result_drupal_scan_list_value_raw']['table'] = 'field_revision_conduit_result_drupal_scan_list';
   $handler->display->display_options['sorts']['conduit_result_drupal_scan_list_value_raw']['field'] = 'conduit_result_drupal_scan_list_value_raw';
-  /* Argument: Field tables: conduit_result_drupal_scan_list=>Entity id */
-  $handler->display->display_options['arguments']['entity_id_raw']['id'] = 'entity_id_rawr';
-  $handler->display->display_options['arguments']['entity_id_raw']['table'] = 'field_data_conduit_result_drupal_scan_list';
-  $handler->display->display_options['arguments']['entity_id_raw']['field'] = 'entity_id_raw';
-  $handler->display->display_options['arguments']['entity_id_raw']['default_action'] = 'not found';
-  $handler->display->display_options['arguments']['entity_id_raw']['style_plugin'] = 'default_summary';
-  $handler->display->display_options['arguments']['entity_id_raw']['default_argument_type'] = 'fixed';
+  /* Argument: Revision tables: conduit_result_drupal_scan_list=>Entity id */
+  $handler->display->display_options['arguments']['entity_id']['id'] = 'entity_id';
+  $handler->display->display_options['arguments']['entity_id']['table'] = 'field_revision_conduit_result_drupal_scan_list';
+  $handler->display->display_options['arguments']['entity_id']['field'] = 'entity_id';
+  $handler->display->display_options['arguments']['entity_id']['default_action'] = 'not found';
+  $handler->display->display_options['arguments']['entity_id']['style_plugin'] = 'default_summary';
+  $handler->display->display_options['arguments']['entity_id']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['entity_id']['validate_type'] = 'node';
+  $handler->display->display_options['arguments']['entity_id']['validate_options']['types'] = array(
+    'conduit_job_drupal_scan' => 'conduit_job_drupal_scan',
+  );
+  $handler->display->display_options['arguments']['entity_id']['validate_options']['access'] = '1';
+  $handler->display->display_options['arguments']['entity_id']['break_phrase'] = 0;
+  $handler->display->display_options['arguments']['entity_id']['not'] = 0;
+  /* Argument: Revision tables: conduit_result_drupal_scan_list=>Revision id */
+  $handler->display->display_options['arguments']['revision_id_raw']['id'] = 'revision_id_raw';
+  $handler->display->display_options['arguments']['revision_id_raw']['table'] = 'field_revision_conduit_result_drupal_scan_list';
+  $handler->display->display_options['arguments']['revision_id_raw']['field'] = 'revision_id_raw';
+  $handler->display->display_options['arguments']['revision_id_raw']['default_action'] = 'not found';
+  $handler->display->display_options['arguments']['revision_id_raw']['style_plugin'] = 'default_summary';
+  $handler->display->display_options['arguments']['revision_id_raw']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['revision_id_raw']['validate_type'] = 'numeric';
+  $handler->display->display_options['arguments']['revision_id_raw']['break_phrase'] = 0;
+  $handler->display->display_options['arguments']['revision_id_raw']['not'] = 0;
   $translatables['drupal_scan_result'] = array(
     t('Defaults'),
     t('more'),
