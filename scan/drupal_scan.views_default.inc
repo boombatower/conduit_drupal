@@ -55,11 +55,11 @@ function drupal_scan_views_default_views() {
   $handler->display->display_options['fields']['conduit_result_drupal_scan_list_value_raw']['element_default_classes'] = 1;
   $handler->display->display_options['fields']['conduit_result_drupal_scan_list_value_raw']['hide_empty'] = 0;
   $handler->display->display_options['fields']['conduit_result_drupal_scan_list_value_raw']['empty_zero'] = 0;
-  /* Sort criterion: Revision tables: conduit_result_drupal_scan_list=>Value */
+  /* Sort criterion: Revision tables: conduit_result_drupal_scan_list => Value */
   $handler->display->display_options['sorts']['conduit_result_drupal_scan_list_value_raw']['id'] = 'conduit_result_drupal_scan_list_value_raw';
   $handler->display->display_options['sorts']['conduit_result_drupal_scan_list_value_raw']['table'] = 'field_revision_conduit_result_drupal_scan_list';
   $handler->display->display_options['sorts']['conduit_result_drupal_scan_list_value_raw']['field'] = 'conduit_result_drupal_scan_list_value_raw';
-  /* Argument: Revision tables: conduit_result_drupal_scan_list=>Entity id */
+  /* Argument: Revision tables: conduit_result_drupal_scan_list => Entity id */
   $handler->display->display_options['arguments']['entity_id']['id'] = 'entity_id';
   $handler->display->display_options['arguments']['entity_id']['table'] = 'field_revision_conduit_result_drupal_scan_list';
   $handler->display->display_options['arguments']['entity_id']['field'] = 'entity_id';
@@ -73,7 +73,7 @@ function drupal_scan_views_default_views() {
   $handler->display->display_options['arguments']['entity_id']['validate_options']['access'] = '1';
   $handler->display->display_options['arguments']['entity_id']['break_phrase'] = 0;
   $handler->display->display_options['arguments']['entity_id']['not'] = 0;
-  /* Argument: Revision tables: conduit_result_drupal_scan_list=>Revision id */
+  /* Argument: Revision tables: conduit_result_drupal_scan_list => Revision id */
   $handler->display->display_options['arguments']['revision_id_raw']['id'] = 'revision_id_raw';
   $handler->display->display_options['arguments']['revision_id_raw']['table'] = 'field_revision_conduit_result_drupal_scan_list';
   $handler->display->display_options['arguments']['revision_id_raw']['field'] = 'revision_id_raw';
