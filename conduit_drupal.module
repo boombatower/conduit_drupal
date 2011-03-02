@@ -7,6 +7,30 @@
  */
 
 /**
+ * Implements hook_block_view_alter().
+ */
+function conduit_drupal_block_view_alter(&$data, $block) {
+  if ($block->module == 'conduit' && $block->delta == 'conduit' && !empty($data['content'])) {
+    // If the current job node is a scan job then modify the plumber link to
+    // include the scan so it will automatically be added to properties.
+    if (($node = menu_get_object()) && $node->type == 'conduit_job_drupal_scan') {
+      $data['content']['drupal']['#links']['Run tests']['title'] .= ' (from scan)';
+      $data['content']['drupal']['#links']['Run tests']['query']['scan'] = $node->nid;
+    }
+  }
+}
+
+/**
+ * Implements hook_form_alter(): conduit_job_drupal_plumber_node_form.
+ */
+function conduit_drupal_form_conduit_job_drupal_plumber_node_form_alter(&$form, &$form_state, $form_id) {
+  // If scan value exists then place it in properties field.
+  if (isset($_GET['scan'])) {
+    $form['conduit_properties'][LANGUAGE_NONE][0]['value']['#default_value'] = serial_display(array('scan' => (int) $_GET['scan']), 'edit');
+  }
+}
+
+/**
  * Implements hook_conduit_validate().
  */
 function conduit_drupal_conduit_validate(array $properties) {
