@@ -14,8 +14,8 @@ function conduit_drupal_block_view_alter(&$data, $block) {
     // If the current job node is a scan job then modify the plumber link to
     // include the scan so it will automatically be added to properties.
     if (($node = menu_get_object()) && $node->type == 'conduit_job_drupal_scan') {
-      $data['content']['drupal']['#links']['Run tests']['title'] .= ' (from scan)';
-      $data['content']['drupal']['#links']['Run tests']['query']['scan'] = $node->nid;
+      $data['content']['drupal']['#links']['Tests']['title'] .= ' (from scan)';
+      $data['content']['drupal']['#links']['Tests']['query']['scan'] = $node->nid;
     }
   }
 }
