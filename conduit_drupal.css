@@ -42,7 +42,3 @@
 #edit-submit-drupal-coder-result, #edit-submit-drupal-plumber-result {
   margin-top: 0;
 }
-
-.view-drupal-scan-result td {
-  border-left: 2px solid #eeeeee;
-}
