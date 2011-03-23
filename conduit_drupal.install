@@ -58,7 +58,7 @@ function conduit_drupal_install_group($type, $primary_field = NULL) {
       unset($group->children[$key]);
     }
   }
-  field_group_create_field_group($group);
+  field_group_save($group);
 }
 
 /**
