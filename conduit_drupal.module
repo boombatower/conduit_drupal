@@ -182,3 +182,19 @@ function conduit_drupal_form_views_exposed_form_alter(&$form, &$form_state) {
     unset($form['#action']);
   }
 }
+
+/**
+ * Wrapper for conduit_views_revision() that changes the page path as well.
+ *
+ * @see conduit_views_revision()
+ */
+function conduit_drupal_views_revision($view) {
+  $view = conduit_views_revision($view);
+
+  // Add the revision into the page path.
+  $display = $view->display['default'];
+  $path = &$display->display_options['fields']['conduit_result_drupal_item_value_raw']['alter']['path'];
+  $path = str_replace('node/!1', 'node/!1/revisions/!2', $path);
+
+  return $view;
+}
