@@ -145,30 +145,17 @@ function conduit_drupal_views_field_add_multi_join_alter(&$join, &$context) {
 
 /**
  * Implements hook_block_info_alter().
+ *
+ * Enable exposed views filter blocks.
  */
 function conduit_drupal_block_info_alter(&$blocks, $theme, $code_blocks) {
   foreach ($blocks['views'] as &$block) {
-    unset($type);
-    if (strpos($block['info'], 'drupal_coder_result') !== FALSE) $type = 'conduit_job_drupal_coder';
-    if (strpos($block['info'], 'drupal_plumber_result') !== FALSE) $type = 'conduit_job_drupal_plumber';
-    if (isset($type)) {
-      if (empty($block['status'])) {
+    foreach (array('drupal_coder_result', 'drupal_plumber_result') as $view) {
+      if (strpos($block['info'], $view) !== FALSE) {
         $block['status'] = 1;
         $block['region'] = 'sidebar_first';
         $block['weight'] = -9;
-        $block['pages'] = implode("\n", array('node/add/*', 'node/*/edit', 'node/*/properties'));
-      }
-      else {
-        // Restrict filter blocks to the content type they are related to.
-        $form_state = array(
-          'values' => array(
-            'types' => array($type => $type),
-            'op' => 'Save block',
-          ),
-        );
-        module_load_include('admin.inc', 'block');
-        drupal_form_submit('block_admin_configure', $form_state, $block['module'], $block['delta']);
-        drupal_get_messages();
+        break;
       }
     }
   }
@@ -178,8 +165,11 @@ function conduit_drupal_block_info_alter(&$blocks, $theme, $code_blocks) {
  * Implements hook_form_FORM_ID_alter(): views_exposed_form.
  */
 function conduit_drupal_form_views_exposed_form_alter(&$form, &$form_state) {
-  if (isset($form['#info']['filter-conduit_result_drupal_item_value_raw'])) {
-    unset($form['#action']);
+  $view = conduit_view_block_form_info($form['#id']);
+  if ($view == 'drupal_coder_result' || $view == 'drupal_plumber_result') {
+    $router_item = menu_get_item();
+    $node = menu_get_object();
+    $form['#access'] = ($router_item['path'] == 'node/%' || $router_item['path'] == 'node/%/revisions/%') && $node->type == 'conduit_job_' . str_replace('_result', '', $view);
   }
 }
 
