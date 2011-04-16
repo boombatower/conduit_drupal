@@ -45,13 +45,15 @@ function drupal_scan_conduit_init($node, $chunk_count) {
  * Implements hook_conduit_result().
  */
 function drupal_scan_conduit_result($node, $delta, $result) {
-  if (is_array($result)) {
+  if (is_array($result) || $result == FALSE) {
     if ($node->conduit_status[LANGUAGE_NONE][0]['value'] == CONDUIT_STATUS_FAIL) {
       // @TODO Determine how we want to handle the context data.
       $node->conduit_summary[LANGUAGE_NONE][0]['value'] = t('Syntax errors found in the following file(s): @files',
         array('@files' => implode(', ', array_keys($result))));
     }
     else {
+      // An empty array will not transfer properly so use FALSE.
+      if ($result == FALSE) $result = array();
       $node->conduit_summary[LANGUAGE_NONE][0]['value'] = t('Found @count test cases', array('@count' => count($result)));
       foreach ($result as $class) {
         $node->conduit_result_drupal_scan_list[LANGUAGE_NONE][]['value'] = $class;
