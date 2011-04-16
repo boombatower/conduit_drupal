@@ -7,6 +7,11 @@
  */
 
 /**
+ * The maximum number of test cases per chunk.
+ */
+define('DRUPAL_PLUMBER_CHUNK', 20);
+
+/**
  * Implements hook_node_info().
  */
 function drupal_plumber_node_info() {
@@ -78,7 +83,7 @@ function drupal_plumber_conduit_queue_build(array $properties) {
   }
 
   // Split test classes up into chunks of 20.
-  $chunks = array_chunk($classes, 20);
+  $chunks = array_chunk($classes, DRUPAL_PLUMBER_CHUNK);
   $items = array();
   foreach ($chunks as $chunk) {
     $items[] = array(
