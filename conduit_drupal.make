@@ -11,3 +11,4 @@ projects[drupal] = 7
 projects[conduit][type] = module
 projects[conduit][download][type] = git
 projects[conduit][download][url] = git@git.boombatower.com:reviewdriven/modules/conduit
+projects[conduit][download][tag] = 7.x-1.0
