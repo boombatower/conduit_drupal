@@ -170,6 +170,7 @@ function conduit_drupal_form_views_exposed_form_alter(&$form, &$form_state) {
     $router_item = menu_get_item();
     $node = menu_get_object();
     $form['#access'] = ($router_item['path'] == 'node/%' || $router_item['path'] == 'node/%/revisions/%') && $node->type == 'conduit_job_' . str_replace('_result', '', $view);
+    unset($form['#action']); // Views seems to point the action to / instead of the current page.
   }
 }
 
