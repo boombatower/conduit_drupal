@@ -116,7 +116,7 @@ function conduit_drupal_views_data_alter(&$data) {
   views_field_add_multi_join($data, 'conduit_result_drupal_type_0', 'conduit_result_drupal_item', 'field_revision');
   views_field_add_multi_join($data, 'conduit_result_drupal_type_1', 'conduit_result_drupal_item', 'field_revision');
   views_field_add_multi_join($data, 'conduit_result_drupal_type_2', 'conduit_result_drupal_item', 'field_revision');
-  // @todo Retain for testing -- delete for production unless we want views on current table.
+
   views_field_add_multi_join($data, 'conduit_result_drupal_type_0', 'conduit_result_drupal_item');
   views_field_add_multi_join($data, 'conduit_result_drupal_type_1', 'conduit_result_drupal_item');
   views_field_add_multi_join($data, 'conduit_result_drupal_type_2', 'conduit_result_drupal_item');
