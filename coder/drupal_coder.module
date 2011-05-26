@@ -32,7 +32,7 @@ function drupal_coder_conduit_validate(array $properties) {
   }
 
   if (!in_array($severity, array('critical', 'normal', 'minor'))) {
-    conduit_validate_error('critical', t('must be: critical, normal, or minor'), $index);
+    conduit_validate_error('severity', t('must be: critical, normal, or minor'), $index);
   }
 
   if (!is_bool($annotate)) {
