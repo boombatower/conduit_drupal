@@ -55,6 +55,7 @@ function conduit_drupal_conduit_validate(array $properties) {
 function conduit_drupal_conduit_default_properties() {
   return array(
     'mask' => '/\.(php|inc|install|module|test)$/',
+    'path' => array('sites/all/modules'),
     'version' => 7,
   );
 }
