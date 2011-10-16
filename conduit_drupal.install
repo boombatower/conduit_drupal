@@ -81,7 +81,6 @@ function conduit_drupal_uninstall_group($type) {
  * Implements hook_install_fields().
  */
 function conduit_drupal_install_fields() {
-  $t = get_t();
   return array(
     'conduit_result_drupal_summary' => array(
       'field_name' => 'conduit_result_drupal_summary',
