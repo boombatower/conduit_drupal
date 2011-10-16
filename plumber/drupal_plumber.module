@@ -46,6 +46,15 @@ function drupal_plumber_conduit_validate(array $properties) {
     }
   }
 
+  if (!module_exists('conduit_coverage')) {
+    if (isset($coverage)) {
+      conduit_validate_error('coverage', t('coverage support not enabled'));
+    }
+  }
+  elseif (!is_bool($coverage)) {
+    conduit_validate_error('coverage', t('must be a boolean'));
+  }
+
   if (!is_array($statuses)) {
     conduit_validate_error('statuses', t('must be an array'));
   }
@@ -62,12 +71,16 @@ function drupal_plumber_conduit_validate(array $properties) {
  * Implements hook_conduit_default_properties().
  */
 function drupal_plumber_conduit_default_properties() {
-  return conduit_drupal_conduit_default_properties() + array(
+  $properties = conduit_drupal_conduit_default_properties() + array(
     'classes' => array(),
     'database' => 'mysql',
     'statuses' => array('fail', 'exception', 'debug'),
     'variables' => array(),
   );
+  if (module_exists('conduit_coverage')) {
+    $properties['coverage'] = FALSE;
+  }
+  return $properties;
 }
 
 /**
@@ -136,6 +149,12 @@ function drupal_plumber_conduit_result($node, $delta, $result) {
     $result['result'][$class]['#title'] = "{$info['name']} ($class) [{$info['group']}]";
   }
   conduit_drupal_conduit_result($node, $delta, $result['result']);
+
+  // If coverage data included in result then save the data.
+  if ($result['coverage']) {
+    conduit_coverage_result_save($node, $delta, $result);
+  }
+  return;
 }
 
 /**
@@ -158,6 +177,14 @@ function drupal_plumber_views_api() {
   );
 }
 
+/**
+ * Implements hook_views_default_views_alter().
+ */
+function drupal_plumber_views_default_views_alter(&$views) {
+  // Restrict the coverage view to the plumber node type.
+  $type = 'conduit_job_drupal_plumber';
+  $views['conduit_coverage']->display['default']->display_options['arguments']['nid']['validate_options']['types'][$type] = $type;
+}
 
 /**
  * Implements hook_views_pre_render().
