@@ -181,9 +181,11 @@ function drupal_plumber_views_api() {
  * Implements hook_views_default_views_alter().
  */
 function drupal_plumber_views_default_views_alter(&$views) {
-  // Restrict the coverage view to the plumber node type.
-  $type = 'conduit_job_drupal_plumber';
-  $views['conduit_coverage']->display['default']->display_options['arguments']['nid']['validate_options']['types'][$type] = $type;
+  if (isset($views['conduit_coverage'])) {
+    // Restrict the coverage view to the plumber node type.
+    $type = 'conduit_job_drupal_plumber';
+    $views['conduit_coverage']->display['default']->display_options['arguments']['nid']['validate_options']['types'][$type] = $type;
+  }
 }
 
 /**
