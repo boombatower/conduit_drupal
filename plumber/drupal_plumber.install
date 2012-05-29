@@ -12,7 +12,6 @@
 function drupal_plumber_install() {
   conduit_install_node_type('conduit_job_drupal_plumber');
   field_helper_install_all('drupal_plumber');
-  conduit_drupal_install_group('conduit_job_drupal_plumber');
 }
 
 /**
@@ -22,7 +21,6 @@ function drupal_plumber_uninstall() {
   module_load_install('conduit');
   conduit_uninstall_node_type('conduit_job_drupal_plumber');
   field_helper_uninstall_all('drupal_plumber');
-  conduit_drupal_uninstall_group('conduit_job_drupal_plumber');
 }
 
 /**

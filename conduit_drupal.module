@@ -191,3 +191,12 @@ function conduit_drupal_views_revision($view) {
 
   return $view;
 }
+
+/**
+ * Implements hook_ctools_plugin_api().
+ */
+function conduit_drupal_ctools_plugin_api($module, $api) {
+  if ($module == 'field_group' && $api == 'field_group') {
+    return array('version' => 1);
+  }
+}

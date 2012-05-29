@@ -21,63 +21,6 @@ function conduit_drupal_uninstall() {
 }
 
 /**
- * Create result field group for node type.
- *
- * @param $type
- *   Node type.
- * @param $primary_field
- *   (Optional) Primary field for the result view.
- */
-function conduit_drupal_install_group($type, $primary_field = NULL) {
-  $info = conduit_job_info($type);
-  $group = array(
-    'group_name' => $info['module'] . '_result',
-    'entity_type' => 'node',
-    'bundle' => $type,
-    'mode' => 'default',
-    'parent_name' => '',
-    'label' => 'Result',
-    'weight' => 10,
-    'children' => array_keys(module_invoke($info['module'], 'install_instances')),
-    'format_type' => 'view',
-    'format_settings' => array(
-      'instance_settings' => array(
-        'primary_field' => $primary_field ? $primary_field : 'conduit_result_drupal_summary',
-        'field_suppress' => 'always',
-      ),
-    ),
-  );
-  $group = (object) $group;
-
-  // Only include drupal result fields.
-  foreach ($group->children as $key => &$child) {
-    if (strpos($child, 'job_conduit_result_drupal') === 0) {
-      $child = substr($child, 4);
-    }
-    else {
-      unset($group->children[$key]);
-    }
-  }
-  field_group_save($group);
-}
-
-/**
- * Remove result field group for node type.
- *
- * @param $type
- *   Node type.
- */
-function conduit_drupal_uninstall_group($type) {
-  $info = conduit_job_info($type);
-  $groups = field_group_read_groups(array(
-    'group_name' => $name = $info['module'] . '_result',
-  ));
-  if ($groups && ($group = $groups['node'][$type]['default'][$name])) {
-    field_group_delete_field_group($group, $group->mode);
-  }
-}
-
-/**
  * Implements hook_install_fields().
  */
 function conduit_drupal_install_fields() {
