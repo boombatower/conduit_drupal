@@ -134,13 +134,6 @@ function drupal_plumber_scan_load($scan_id) {
 }
 
 /**
- * Implements hook_conduit_init().
- */
-function drupal_plumber_conduit_init($node, $chunk_count) {
-  conduit_drupal_conduit_init($node, $chunk_count);
-}
-
-/**
  * Implements hook_conduit_result().
  */
 function drupal_plumber_conduit_result($node, $delta, $result) {

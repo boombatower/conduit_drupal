@@ -67,20 +67,6 @@ function conduit_drupal_conduit_default_properties() {
 }
 
 /**
- * Implements hook_conduit_init().
- */
-function conduit_drupal_conduit_init($node, $chunk_count) {
-  // Empty result fields containing previous result.
-  module_load_install('conduit_drupal');
-  $fields = array_keys(conduit_drupal_install_fields());
-  foreach ($fields as $field) {
-    if (isset($node->$field)) {
-      $node->{$field}[LANGUAGE_NONE] = array();
-    }
-  }
-}
-
-/**
  * Implements hook_conduit_result().
  */
 function conduit_drupal_conduit_result($node, $delta, $result) {

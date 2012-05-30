@@ -35,13 +35,6 @@ function drupal_scan_conduit_queue_build(array $properties) {
 }
 
 /**
- * Implements hook_conduit_init().
- */
-function drupal_scan_conduit_init($node, $chunk_count) {
-  // Number of results cannot be predetermined.
-}
-
-/**
  * Implements hook_conduit_result().
  */
 function drupal_scan_conduit_result($node, $delta, $result) {

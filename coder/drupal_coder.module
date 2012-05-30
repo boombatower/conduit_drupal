@@ -59,13 +59,6 @@ function drupal_coder_conduit_queue_build(array $properties) {
 }
 
 /**
- * Implements hook_conduit_init().
- */
-function drupal_coder_conduit_init($node, $chunk_count) {
-  conduit_drupal_conduit_init($node, $chunk_count);
-}
-
-/**
  * Implements hook_conduit_result().
  */
 function drupal_coder_conduit_result($node, $delta, $result) {
